@@ -14,7 +14,7 @@
 - Prototype
 - [Factory Method](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#factory-method)
 - [Abstract Factory](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#abstract-factory)
-- Singleton
+- [Singleton](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#singleton)
 
 ---
 
@@ -895,5 +895,43 @@ public class Main {
 
  마지막으로 위 이미지를 그동안 예시를 들었던 신발 매장 패턴을 대입하여 추상 팩토리 패턴을 이해하고 정리하면 좋을 것같다.</br></br>
 결과적으로, 추상 팩토리 패턴을 사용하면 DIP 원칙을 준수하게되어 객체들 간의 결합도 낮아져서 유지 보수가 아주 용이해진다.
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
+
+---
+
+## Singleton
+- 싱글톤 패턴(Singleton Pattern)이란 - 여러 차례 호출되더라도 실제로 생성되는 객체는 하나이고 최초 생성 이후에 호출된 생성자는 최초의 생성자가 생성한 객체를 리턴하는 생성패턴이다.
+> - 클래스 내에서 인스턴스가 단 하나뿐임을 보장하므로, 프로그램 전역에서 해당 클래스의 인스턴스를 바로 얻을 수 있고, 불필요한 메모리 낭비를 최소화한다.
+> - 키보드 리더, 프린터 스풀러 또는 공통된 객체를 여러개 생성해서 사용하는 DBCP(Database Connection Pool)등 클래스의 객체를 하나만 만들어야 하는 상황에서 사용한다.
+> - 싱글톤 패턴을 사용하기 위해서는 반드시 접근제한자를 이용하여 외부의 접근을 막건, final로 reference를 변경 불가능하게 설정하여야 한다.
+
+```java
+public class Singleton1 {
+
+    private static final Singleton1 instance = new Singleton1();
+
+    private Singleton1() {}
+
+    public static Singleton1 getInstance() {
+        return instance;
+    }
+}
+```
+
+```java
+public class Singleton2 {
+    private static Singleton2 instance;
+
+    private Singleton2() {}
+
+    public static Singleton2 getInstance() {
+        if (instance == null) {
+            instance = new Singleton2();
+        }
+        return instance;
+    }
+}
+```
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
