@@ -551,6 +551,7 @@ class DependentShoesStore {
 하지만 몇몇 분점에서는 각 현지 공장에서 싸구려 재료들을 몰래 사용해서 본사에서 의도하지 않은 마진을 몰래 올리고 있다는 소식을 듣고 무언가 조치를 취하려고 한다.</br></br>
 그래서 본사에서 원재료를 사용해서 신발을 만들어서 분점으로  배송하려고 했는데 지난 팩토리 메서드를 정리한 부분에서 먼저 보았듯이, 같은 검은 구두라고 하더라도 일본매장의 검은 신발과 프랑스매장의 검은 신발의 밑창은 서로 다르게 만들어야하고 따라서 재료들도 달라져서 문제가 생긴다.</br></br>
 그래서 다시 생각해낸 해결 방법이 지역 별로 소규모 신발재료 공장을 나누어서 신발을 만드는 것이다.</br>
+
 ```java
 interface ShoesIngredientFactory {
  
@@ -563,6 +564,7 @@ interface ShoesIngredientFactory {
 }
 ```
 그래서 위와 같은 공통 기능을 제공할 신발재료 공장 인터페이스를 만들어 주었다.
+
 ```java
 class JPShoesIngredientFactory implements ShoesIngredientFactory {
  
