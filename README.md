@@ -10,7 +10,7 @@
     - [Builder](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#buillder)
     - Prototype
    - [Factory Method](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#factory-method)
-    - Abstract Factory
+    - [Abstract Factory](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#abstract-factory)
     - Singleton
 
 ---
