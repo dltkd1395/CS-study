@@ -258,7 +258,8 @@ User user3 = new User.UserBuilder("nabi", "Choi")
 <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/factory1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 - 팩토리 메소드 패턴은 무언가를 위한 공장이라고 생각하면 된다.
   [신발 매장 코드 예시]
-  ```java
+
+```java
   // 해당 이름의 신발을 찾아서 특정 구상 객체 생성
   Shoes orderShoes(String name) {
     // 해당 이름의 신발을 찾아서 특정 구상 객체 생성
@@ -275,11 +276,13 @@ User user3 = new User.UserBuilder("nabi", "Choi")
 
     return shoes
   }
-  ```
+```
+
 - 현재 이 신발 매장에는 3개의 신발만 팔고 있다. 그리고 앞으로 판매되는 제품이 늘어나가거나 지금 있는 제품이 더 이상 판매되지 않을 수 도 있다. 이 부분은 언제나 변경이 가능한 부분이다.
 - 그러나 밑에 있는 prepare()과 packing() 두 메서드는 제품에 변화가 생기더라도 변하지 않는 부분이다.
 - 위 코드를 간단하게 캡슐화하여 ShoesFactory라는 클래스로 만들면
-  ```java
+  
+```java
   public class ShoesFactory {
     public Shoes makeShoes(String name) {
         Shoes shoes = null;
@@ -291,8 +294,10 @@ User user3 = new User.UserBuilder("nabi", "Choi")
     }
   }
   ```
+
   - 위 코드처럼 만들 수 있다. 그리고 아래처럼 할 수 있다.
-  ```java
+  
+```java
   public class ShoesStore {
     ShoesFactory factory;
 
@@ -308,10 +313,11 @@ User user3 = new User.UserBuilder("nabi", "Choi")
         return shoes;
     }
   }
-  ```
+```
  - 고객에게 득정 신발에 대한 주문이 들어 왔을 때 매장에서는 공장에 해당 신발 오더를 넣고 받으면 되고, 판매하는 신발이 늘어나거나 단종되면 신발 매장이 아닌 신발 공장에서 그 변화를 처리할 수 있다.
  - 위의 예시 코드는 디자인 패턴까지 아니고 프로그래밍에 사용하는 관용구정도로 보면 된다.
  - 위에서 봤던 신발 매장은 점점 성장하여 다른 나라로 진출하기 시작했다. 일본과 프랑스에도 진출을 하여 매장을 지었다고 하자.
+  
 ```java
 JapanShoesStore jpStore = new JapanShoesStore(new JapanShoesFactory());
 jpStore.order("blackShoes");
