@@ -9,13 +9,13 @@
 1. **생성 패턴**
     - [Builder](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#buillder)
     - Prototype
-    - Factory Method
+   - [Factory Method](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#factory-method)
     - Abstract Factory
     - Singleton
 
 ---
 
-2. **구조 패턴**
+1. **구조 패턴**
     - Bridge
     - Decorator
     - Facade
