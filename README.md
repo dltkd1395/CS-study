@@ -7,7 +7,7 @@
 ## 디자인 패턴
 
 1. **생성 패턴**
-    - Builder
+    - [Builder](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#buillder)
     - Prototype
     - Factory Method
     - Abstract Factory
