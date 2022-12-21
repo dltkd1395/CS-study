@@ -255,7 +255,7 @@ User user3 = new User.UserBuilder("nabi", "Choi")
 
 ## Factory Method
 - 팩토리 메소드 패턴(Factory Method Pattern) - 상위 클래스에 알려지지 않은 구현 클래스를 생성하는 패턴이다. 또한 하위 클래스가 어떤 객체를 생성할지 결정하도록 하는 패턴이기도 한다. 그리고 상위 클래스 코드에 구체적인 클래스 이름을 감추기 위한 방법으로도 사용한다.
-<img src="/dltkd1395/CS-study/raw/main/DesignPattern/image/factory1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/factory1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 - 팩토리 메소드 패턴은 무언가를 위한 공장이라고 생각하면 된다.
   [신발 매장 코드 예시]
   ```java
@@ -368,9 +368,9 @@ class FranceShoesStore extends ShoesStore {
 }
 ```
 - 여기서 가장 중요한 점은 하위 클래스에서 메서드를 오버라이딩 하였기 때문에, 슈퍼클래스에 있는 orderShoes 메서드에서는 어떤 신발이 만들어 지는지 전혀 모르고 있다는 것이다. 동적 바인딩되는 그 메서드에서 주는 신발을 받아서 준비하고 포장할 뿐이다.
-  <img src="/dltkd1395/CS-study/raw/main/DesignPattern/image/factory3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+  <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/factory3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
   - 신발을 주고 받고 생성하는 생성자 클래스
-    <img src="/dltkd1395/CS-study/raw/main/DesignPattern/image/factory4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+    <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/factory4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 - ***생성자 클래스에서 생산되는 제품 클래스***
 - 팩토리 메소드 패턴의 클래스들은 크게 생산자 클래스와 제품 클래스로 구분할 수 있다.
