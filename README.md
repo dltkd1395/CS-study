@@ -4,6 +4,13 @@
 
 ---
 
+## OOP
+- [단일 책임 원칙(SRP)](https://github.com/dltkd1395/CS-study/tree/main/OOP#srp)
+- [개방 폐쇄 원칙(OCP)](https://github.com/dltkd1395/CS-study/tree/main/OOP#ocp)
+- [리스코프 치환 원칙(LSP)](https://github.com/dltkd1395/CS-study/tree/main/OOP#lsp)
+- [인터페이스 분리 원칙(ISP)](https://github.com/dltkd1395/CS-study/tree/main/OOP#isp)
+- [의존관계 역전 원칙(DIP)](https://github.com/dltkd1395/CS-study/tree/main/OOP#dip)
+
 ## 디자인 패턴
 
 1. **생성 패턴**
