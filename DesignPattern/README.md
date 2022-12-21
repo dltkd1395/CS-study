@@ -256,8 +256,8 @@ User user3 = new User.UserBuilder("nabi", "Choi")
 ## Factory Method
 - 팩토리 메소드 패턴(Factory Method Pattern) - 상위 클래스에 알려지지 않은 구현 클래스를 생성하는 패턴이다. 또한 하위 클래스가 어떤 객체를 생성할지 결정하도록 하는 패턴이기도 한다. 그리고 상위 클래스 코드에 구체적인 클래스 이름을 감추기 위한 방법으로도 사용한다.
 <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/factory1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
-- 팩토리 메소드 패턴은 무언가를 위한 공장이라고 생각하면 된다.
-  [신발 매장 코드 예시]
+- 팩토리 메소드 패턴은 무언가를 위한 공장이라고 생각하면 된다.</br>
+[신발 매장 코드 예시]
 
 ```java
   // 해당 이름의 신발을 찾아서 특정 구상 객체 생성
