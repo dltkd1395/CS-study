@@ -198,7 +198,7 @@ public class Manager extends Employee{
 - [OCP(개방 폐쇄 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#ocp)
 - [LSP(리스코프 치환 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#lsp)
 - [ISP(인터페이스 분리 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#isp)
-- [DIP(의존관계 역전 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#dip)
+- [DIP(의존관계 역전 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#dip)</br>
 디자인 패턴이 특별한 상황에서 발생하는 문제에대한 구체적인 솔루션이라면 객체지향 설계원칙은 좀 더 일반적인 상황에서 적용가능한 설계기준입니다.</br>
 객체지향의 5가지 원칙을 지키면 객체지향의 가장 큰 장점을 극대화 할 수 있습니다.
 
