@@ -135,11 +135,11 @@ public User(String firstName, String, lastName, int phone) {
 ```java
 // 클래스를 Final로 설정하여 확장이 불가능하며 불변성이 유지됨
 public final class User {
-	private final String firstName; //필수 변수
-	private final String lastName; //필수 변수
-	private final int age; //필수 변수
-	private final String phone; //필수 변수
-	private final String address; //필수 변수
+	private final String firstName;     //필수 변수
+	private final String lastName;      //필수 변수
+	private final int age;              //선택 변수
+	private final String phone;         //선택 변수
+	private final String address;       //선택 변수
 
 	private User(UserBuilder builder) {
 		this.firstName = builder.firstName;

@@ -22,7 +22,9 @@
 ## OOP의 기본 구성 요소
 <img src="https://github.com/dltkd1395/CS-study/blob/main/OOP/image/fish1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 </br>
-> 붕어빵 틀 = 클래스, 붕어빵의 실체 = 인스턴스, 붕어빵 한 마리 = 객체, 굽기() = 인스턴스화
+
+>붕어빵 틀 = 클래스, 붕어빵의 실체 = 인스턴스, 붕어빵 한 마리 = 객체, 굽기() = 인스턴스화
+
 </br></br>
 
 ### 클래스(Class)
@@ -91,6 +93,7 @@
 - 하나의 객체에 대해 그 객체가 `특정한 목적을 위한 필요한 변수나 메소드를 하나로 묶는 것`
 - 따라서 클래스를 만들 때 사용할 `변수`와 그 변수를 가지고 특정한 액션, 즉 `메소드`를 관련성 있게 클래스에 구성해야한다.
 </br></br>
+
 ### 정보은닉
 - 캡슐화를 하는 중요한 목적은 바로 `정보은닉`이다.
 - 유저 정보를 가지고 있는 User라는 객체에서 유저의 정보가 public으로 선언되어 있다면, 누구든 접근해서 유저 정보를 변경할 수 있다.
@@ -101,7 +104,8 @@
 ### 정보은닉이 왜 필요할까?
 - `높은 응집도`와 `낮은 결합도`를 유지할 수 있도록 설계하여 요구사항을 변경할 때 유연하게 대처하기 위해서
 - 한 클래스가 변경이 발생하면 변경된 클래스에 의존하는 다른 클래스들도 변경해야 할 가능성이 커지기 때문이다.
-> 응집도(Cohesion) : 클래스나 모듈 안의 요소들이 얼마나 밀접하게 관련되어 있는지를 나타낸다.
+  
+> 응집도(Cohesion) : 클래스나 모듈 안의 요소들이 얼마나 밀접하게 관련되어 있는지를 나타낸다.</br>
 > 결합도(Coupling) : 어떤 기능을 실행하는 데 다른 클래스나 모듈들에 얼마나 의존적인지를 나타낸다.
 
 `캡슐화 -> 정보은닉 (private, getter, setter) -> 높은 응집도, 낮은 결합도`
@@ -194,11 +198,13 @@ public class Manager extends Employee{
 
 ## OOP의 5가지 설계 원칙
 ### SOLID
+
 - [SRP(단일 책임 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#srp)
 - [OCP(개방 폐쇄 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#ocp)
 - [LSP(리스코프 치환 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#lsp)
 - [ISP(인터페이스 분리 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#isp)
 - [DIP(의존관계 역전 원칙)](https://github.com/dltkd1395/CS-study/tree/main/OOP#dip)</br>
+
 디자인 패턴이 특별한 상황에서 발생하는 문제에대한 구체적인 솔루션이라면 객체지향 설계원칙은 좀 더 일반적인 상황에서 적용가능한 설계기준입니다.</br>
 객체지향의 5가지 원칙을 지키면 객체지향의 가장 큰 장점을 극대화 할 수 있습니다.
 
