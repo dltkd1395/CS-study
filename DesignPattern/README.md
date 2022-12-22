@@ -1580,7 +1580,7 @@ Cooler Stop
 Microwave Off
 ```
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/facade1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/facade2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 - 위클래스 다이어그램과 같이 전자레인지를 사용하는 MicrowaveTest(User) 클래스에서는 전자레인지의 내부 부품들이 MicrowaveFacade 클래스에 감싸져 있지만 제공되는 인터페이스(on, off 버튼 등)를 통해 간편하게 사용할 수 있다.
 
