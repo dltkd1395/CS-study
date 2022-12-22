@@ -28,7 +28,7 @@
     - [Facade](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#facade)
     - Flyweight
     - Proxy
-    - Composite
+    - [Composite](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#composite)
     - Adapter
 
 ---
