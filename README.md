@@ -25,7 +25,7 @@
 1. **구조 패턴**
     - [Bridge](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#bridge)
     - [Decorator](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#decorator)
-    - Facade
+    - [Facade](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#facade)
     - Flyweight
     - Proxy
     - Composite
