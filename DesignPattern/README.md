@@ -537,6 +537,7 @@ class DependentShoesStore {
 - 이 원칙을 제대로 적용하려면, 구현 클래스처럼 구체적인 것이 아니라 추상 클래스나 인터페이스같이 추상적인 것에 의존하는 코드를 만들어서 고수준 컴포넌트와 저수준 컴포넌트 모두에 적용하여야한다.
 - 그래서 방금 말한 의존관계 역전 원칙을 구두 가게에 다시 적용해보자면 아래와 같은 UML처럼 설계가 가능하다.</br>
  <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/AbFactory3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+ 
 - 이렇게 하면 고수준 컴포넌트 ShoesStore와 저수준 컴포넌트인 각종 구두 객체들 모두 추상클래스인 Stores에 의존하게 된다.
 - 하지만 설계를 하다보면 의존관계 역전 원칙을 지키도록 설계하기가 쉽지 않다.
 - 그래서 의존 관계 역전원칙을 지키는데 도움이 될만한 가이드 라인을 가져왔다.
