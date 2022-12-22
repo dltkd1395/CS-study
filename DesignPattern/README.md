@@ -26,7 +26,7 @@
 - Flyweight
 - Proxy
 - [Composite](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#composite)
-- Adapter
+- [Adapter](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#adapter)
 
 ---
 
@@ -1718,5 +1718,132 @@ public class Main {
 - 설계를 일반화 시켜 객체간의 구분, 제약이 힘들다.
   
 - 정리하자면, 컴포지트 패턴의 장점은 사용자 입장에서는 이게 단일 객체인지 복합 객체인지 신경쓰지 않고 사용할 수 있다는 장점이 있지만 설계가 지나치게 범용성을 갖기 때문에 새로운 요소를 추가할 떄 복합 객체에서 구성 요소에 제약을 갖기가 힘들다.
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
+
+---
+
+### Adapter
+
+- 어댑터 패턴(Adapter Pattern)이란 - 한 글래스의 인터페이스를 클라이언트에서 사용하고자 할 떄, 다른 인터페이스로 변환시켜 사용하는 패턴이다.
+- 어댑터를 이용하면 인터페이스 호환성 문제 때문에 같이 쓸 수 없는 클래스들을 연결해서 쓸 수 있다.
+- 어댑터 패턴은 우리가 여행용 전원 어댑터를 생각해보면 이해가 쉽다.
+- 우리가 사용하는 휴대폰, 노트북 충전기는 220V 동그란 돼지코 한국의 표준 플러그를 사용하지만, 전세게별로 이 플러그 표준이 각기 다 다르다.
+- 일본은 동그란 모양이 아닌 || 모양을 표준으로 사용하고, 호주는 ∴ 모양을 표준으로 사용한다.
+- 그렇기 때문에 우리가 해당 나라에서 여행을 가서 콘센트를 사용해 충전을 하기 위해서는 아래 사진과 같은 전원 어댑터가 필요하다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/adapter1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 이와 같이 어댑터는 소켓의 인터페이스를 플러그에서 필요로 하는 인터페이스로 바꿔준다고 할 수 있다.
+- 객체 지향 프로그램에서의 어댑터도 마찬가지로 일상 생활에서와 동일하게 어떤 인터페이스를 클라이언트에서 요구하는 형태의 인터페이스로 맞춰기 위해 중간에서 연결시켜주는 역할을 한다.
+- 아래 어댑터의 기능을 잘 표현하는 UML이 있어서 가져와 보았다. 약간의 이해를 더 돕기 위해 MediaPackage라는 이름을 VideoPlayer으로, Media Player는 AudioPalyer라는 이름으로 변경하여 구현하였다.
+  
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/adapter2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 아래는 AudioPlayer 인터페이스와 AudioPlayer 인터페이스를 구현하는 MP3 클래스이다.
+
+```java
+public interface AudioPlayer{
+   
+   void play(String filename);
+   
+}
+```
+
+```java
+public class MP3 implements AudioPlayer{
+   
+   @Override
+   void play(String filename){
+      System.out.println("Playing MP3 File ♪ : "filename);
+   }
+   
+}
+```
+
+- 아래는 VideoPlayer 인터페이스와 VideoPlayer 인터페이스를 구현하는 MP4, MKV 클래스이다.
+
+```java
+public interface VideoPlayer{
+   
+   void play(String filename);
+   
+}
+```
+
+```java
+public class MP3 implements VideoPlayer{
+   
+   @Override
+   void play(String filename){
+      System.out.println("Playing MP4 File ▶ : "filename);
+   }
+   
+}
+```
+
+```java
+public class MKV implements VideoPlayer{
+   
+   @Override
+   void play(String filename){
+      System.out.println("Playing MKV File ▶ : "filename);
+   }
+   
+}
+```
+
+- 아래는 VideoPlayer포맷을 AudioPlayer포맷에서도 사용할 수 있게 도와주는 FormatAdapter Class이다. FormatAdapter Class는 AudioPlayer 인터페이스를 상속받고, 멤버 변수로 VideoPlayer를 사용한다. 생성자로 VideoPlayer를 입력받아 해당 Video 포맷을 사용하는 것이다.
+
+```java
+public class FormatAdapter implements AudioPlayer{
+   
+   private VideoPlayer media;
+   
+   public FormatAdapter(VideoPlayer video){
+      this.media = video;
+   }
+   
+   @Override
+   void play(String filename){
+      System.out.println("Using Adapter : ");
+      media.playFile(filename);
+   }
+   
+}
+```
+
+- 아래 Main Class는 어댑터 패턴의 사용 예시이다.
+- MP3 인스턴스를 AudioPlayer 참조변수로 mp3Player 객체를 생성하였는데,
+- MP4 인스턴스에 어댑터를 사용하면 MP4도 mp3Player에서도 사용할 수 있게 된다.
+
+```java
+public class Main{
+
+   public static void main(String[] args){
+   
+   AudioPlayer mp3Player = new MP3();
+   mp3Player.play("file.mp3");
+   
+   mp3Player = new FormatAdapter(new MP4());
+   mp3Player.play("file.mp4");
+   
+   mp3Player = new FormatAdapter(new MKV());
+   mp3Player.play("file.mkv");
+   
+   }
+   
+}
+```
+
+- 위 코드를 실행시켜보면 아래와 같이 출력이 됨을 알 수 있다.
+
+```
+> Playing MP3 File ♪ : file.mp3
+> Using Adapter : Playing MP4 File ▶ : file.mp4
+> Using Adapter : Playing MKV File ▶ : file.mkv
+```
+
+- 이렇게 어댑터 패턴을 통해 mp3Player에서도 video 포맷의 파일을 재생시킬 수 있다. 물론 영상은 못보고 소리만 나올 것이다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
