@@ -20,7 +20,7 @@
 
 ### **2. 구조 패턴**
 
-- Bridge
+- [Bridge](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#bridge)
 - Decorator
 - Facade
 - Flyweight
@@ -537,7 +537,7 @@ class DependentShoesStore {
 - 이 원칙을 제대로 적용하려면, 구현 클래스처럼 구체적인 것이 아니라 추상 클래스나 인터페이스같이 추상적인 것에 의존하는 코드를 만들어서 고수준 컴포넌트와 저수준 컴포넌트 모두에 적용하여야한다.
 - 그래서 방금 말한 의존관계 역전 원칙을 구두 가게에 다시 적용해보자면 아래와 같은 UML처럼 설계가 가능하다.</br>
  <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/AbFactory3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
- 
+
 - 이렇게 하면 고수준 컴포넌트 ShoesStore와 저수준 컴포넌트인 각종 구두 객체들 모두 추상클래스인 Stores에 의존하게 된다.
 - 하지만 설계를 하다보면 의존관계 역전 원칙을 지키도록 설계하기가 쉽지 않다.
 - 그래서 의존 관계 역전원칙을 지키는데 도움이 될만한 가이드 라인을 가져왔다.
@@ -958,5 +958,192 @@ public class Singleton2 {
     }
 }
 ```
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
+
+---
+
+## 2. 구조 패턴
+
+### Bridge
+
+ <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/bridge1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+ ### Bridge 패턴이란?
+ - 큰 클래스 또는 밀접하게 관련된 클래스 집합을 서로 독립적으로 개발할 수 있도록 두 개의 계층(기능 계층과 구현 계층)으로 분리한 디자인 패턴이다.
+ - 구현부에서 추상층을 분리하여 각자 독립적으로 변형이 가능하고 확장이 가능하도록 한다. 즉 기능과 구현에 대해서 두 개를 별도의 클래스로 구현을 한다.
+
+ <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/bridge2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+ - 먼저 브릿지 패턴이 왜 필요한지 알아보자.
+
+### 문제
+- `shape`라는 클래스가 `Circle`가 `Square`라는 2개의 서브클래스를 가진다고 가정해보자.
+- 이 클래스 구조에서 각각 `Red`와 `Blue`라는 Color를 적용시켜 Shape에 ***Color를 통합, 확장***시키려고한다.
+- 이미 `Shape`에는 `Circle`과 `Square`라는 하위 클래스가 있으므로, 위 이미지와 같이 `BlueCircle` 및 `RedSquare`와 같이 네 개의 클래스 조합을 만들어야 한다.
+- 만약 계속 이런 방식으로 클래스를 확장해 나가서 Shape가 100개, Color가 100개 된다면 10,000개의 클래스가 필요하게 된다.
+- 이 후 Shape이나, Color를 1개라도 추가시키려면 각 Shape별 혹은 Color별 클래스가 100개씩 추가시키는 작업이 필요하게 되는 것은 큰 문제이다.
+- 이러한 문제를 해결하는 디자인 패턴이 바로 브릿지 패턴이다.
+
+### 해결
+- 위와 같은 문제는 Shape 클래스를 Shape별, Color별 독립적으로 확장하려고 하기 때문에 발생하는 문제인데, 이러한 문제는 계급 상속과 관련된 매우 흔한 문제라고 할 수 있다.
+- 브릿지 패턴은 객체 합성으로 이문제를 해결한다. 한 클래스 내에 모든 상태나 동작을 포함하는 것이 아닌 아래의 이미지와 같이 원래의 클래스가 새로 확장하려는 상태를 클래스로 분리하여 해당 클래스를 참조하여 조합을 만드는 것이다.
+
+ <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/bridge3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+ ### Bridge 패턴 구조
+
+  <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/bridge4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- `Client` : 일반적으로 클라이언트는 추상화 작업에만 관심이 있지만 추상화 개체를 구현 개체 중 하나와 연결하는 것은 클라이언트가 해주어야 하는 작업이다.
+- `Abstraction` : 기능 계층의 최상위 클래스. 구현 부분에 해당하는 클래스를 인스턴스를 가지고 해당 인스턴스를 통해 구현 부분의 메서드를 호출한다.
+- `Refind Abstraction` : 기능 계층에서 새로운 부분을 확장한 클래스
+- `Implementation` : Abstraction의 기능을 구현하기 위한 인터페이스 정의
+- `ConcreteImplementions` : 실제 기능을 구현한다.
+
+### Bridge 패턴 구현
+
+  <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/bridge5.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+  ```java
+public class RemoteControl {
+    private Device divice;
+    
+    public RemoteControl(Device divice){
+         this.divice = divice;
+    }
+    
+    public void togglePower() {
+         if(divice.isEnabled()) divice.disable();
+         else divice.enable();
+    }
+    
+    public void volumeDown {
+         device.setVolume(device.getVolume() - 10);
+    }
+    
+    public void volumeUp {
+         device.setVolume(device.getVolume() + 10);
+    }
+    
+    public void channelDown {
+         device.setChannel(device.getChannel() - 1);
+    }
+    
+    public void channelUp {
+         device.setChannel(device.getChannel() + 1);
+    }
+}
+  ```
+
+
+```java
+public class AdvancedRemoteControl extends RemoteControl {
+    public void mute() {
+         device.setVolume(0);
+    }
+}
+```
+
+```java
+public interface Device {
+    public boolean isEnabled();
+    public void enable();
+    public void disable();
+    public int getVolume();
+    public void setVolume(int percent);
+    public int getChannel();
+    public void setChannel(int channel);
+}
+```
+
+```java
+public class Radio implements Device {
+    private int volume = 50, channel = 11;
+    private boolean isEnabled;
+
+    public boolean isEnabled(){
+         return this.isEnabled
+    }
+    public void enable(){
+         this.isEnabled = true;
+    }
+    public void disable(){
+         this.isEnabled = false;
+    }
+    public int getVolume(){
+         return this.volume;
+    }
+    public void setVolume(int volume){
+         this.volume = volume;
+    }
+    public int getChannel(){
+         return this.channel;
+    }
+    public void setChannel(int channel){
+         this.channel = channel;
+    }
+}
+```
+
+```java
+public class TV implements Device{
+    private int volume, channel;
+    private boolean isEnabled;
+
+    public boolean isEnabled(){
+         return this.isEnabled
+    }
+    public void enable(){
+         this.isEnabled = true;
+    }
+    public void disable(){
+         this.isEnabled = false;
+    }
+    public int getVolume(){
+         return this.volume;
+    }
+    public void setVolume(int volume){
+         this.volume = volume;
+    }
+    public int getChannel(){
+         return this.channel;
+    }
+    public void setChannel(int channel){
+         this.channel = channel;
+    }
+}
+```
+
+```java
+public class Main {
+    public static void main(String argsp[])
+    {    
+        tv = new Tv()
+         remote = new RemoteControl(tv);
+         remote.togglePower();
+
+         radio = new Radio();
+         remote = new AdvancedRemoteControl(radio);
+    }
+}
+```
+
+- 흔히 `Adapter` 패턴과 `Bridge` 패턴을 헷갈려하는 경우가 많다고 한다.
+- `Adpater` 패턴은 ***서로 다른 인터페이스(API)를 연결해주는 패턴***이라면,
+- `Bridge` 패턴은 ***구현 계층과 기능(추상) 계층을 서로 분리, 연결시켜주는 패턴***이다.
+
+### Bridge 패턴의 활용
+- 여러 플랫폼에서 사용해야 할 그래픽스 및 원도우 처리 시스템에서 유용하게 쓰인다.
+- 인터페이스와 실제 구현부를 서로 다른 방식으로 변경해야 하는 경우에 유용하게 쓰인다.
+  
+### Bridge 패턴의 장점
+- 조합의 개수가 늘어남으로써 발생하는 기하급수적인 클래스 확장을 막을 수 있다.
+- 구현을 인터페이스에 완전히 결합시키지 않았기 때문에 구현과 추상화된 부분을 분리시킬 수 있다.
+- 추상화된 부분과 실제 구현 부분을 독립적으로 확장할 수 있다.
+- 추상화된 부분을 구현한 구상 클래스를 바꿔도 클라이언트 쪽에는 영향을 끼치지 않는다.
+
+### Bridge 패턴의 단점
+- 응집도가 높은 클래스에 적용하면 코드와 디자인이 더 복잡해진다는 단점이 있다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
