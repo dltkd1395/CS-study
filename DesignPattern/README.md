@@ -1205,7 +1205,7 @@ public class Americano extends Beverage {
 
 > OCP(Open-Closed Principle) : 클래스는 확장에 대해서는 열려 있고, 변경에 대해서는 닫혀 있어야한다. 즉, 새로운 기능을 추가하려 할 때, 기존 슈퍼 클래스는 수정하지 않고 확장을 통해 간단하게 추가할 수 있도록 한다.
 
-- 그래서 프로그램을 데코레이ㅓ 패턴을 젹용해 새롭게 설계하려 한다.
+- 그래서 프로그램을 데코레이터 패턴을 젹용해 새롭게 설계하려 한다.
 
 <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/decorator4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
@@ -1323,7 +1323,7 @@ public class Shot extends CondimentDecorator {
 }
 ```
 
-- CondimentDecorator 클래스를 상속받는 Whip과 Shot 클래스이다. 생성자에서 전달받은 Beverage 객체의 인슽언스(Americano, CaffeMocha 등 음료)의 멤버와 메서드에 접근하여 추상메서드들을 오버라이딩한다.
+- CondimentDecorator 클래스를 상속받는 Whip과 Shot 클래스이다. 생성자에서 전달받은 Beverage 객체의 인스턴스(Americano, CaffeMocha 등 음료)의 멤버와 메서드에 접근하여 추상메서드들을 오버라이딩한다.
 - CondimentDecorator 클래스도 추상클래스이기 때문에 cost 추상메서드를 구현하지 않을 수 있었고, getDescription 메서드를 추상메서드로 오버라이딩하였기 때문에 Whip과 Shot과 같은 추가 옵션 클래스에서 두 추상메서드를 모두 구현해주어야 한다.
 - 그러면 이제 해당 데코레이터 패턴으로 디자인된 음료클래스를 고객클래스에서 어떻게 주문하는지 보자.
   
@@ -1356,7 +1356,7 @@ public class Customer {
 - 코드에서 보았듯이 옵션을 추가할 때 자신의 인스턴스를 다시 전달함으로써, JavaChip - Whip - Cream - Shot - Shot - CaffeMocha로 감싸지는 형태로 객체가 생성되게 된다. 옵션들의 Beverage 타입의 beverage 멤버를 계속 다음으로 전달하여 저런 형태의 체인이 만들어 지게 되는데, 
 - 이때 제일 외부의 JavaChip 객체의 getDescription 메서드를 실행시키면, beverage에 저장되어 있는 Whip 객체의 getDescription으로, 그리고 이어서 Cream 객체에 있는 getDecription 메서드가 차례로 호출되어 최종적으로 CaffeMocha 객체까지 도달하여 CaffeMocha 객체의 getDescription 메서드까지 호출하는 것이다.
 - 그리고 리턴은 CaffeMocha 객체에 있는 description부터 차례로 리턴되면서 2개의 Shot 객체와 Cream 객체를 거치며 문자열이 계속 더해져 최종적으로 "카페모카, 샷, 샷, 크림, 휘핑크림, 자바칩" 라는 문자열이 완성된다.
-- cost 메서드 또한 마찬가지로 호출이 자바치 -> ... -> 카페모카로 파고들어가서 카페모카에서부터 차근차근 가격이 더해진다.
+- cost 메서드 또한 마찬가지로 호출이 자바칩 -> ... -> 카페모카로 파고들어가서 카페모카에서부터 차근차근 가격이 더해진다.
 - 지금처럼 카페의 음료에 옵션을 추가하여 가격이 더해지고, getDescription에서 문자열이 더해지는 설명은 데코레이터 패턴을 이해하기 쉽게 표현한 것이고, 실질적으로는 추가적으로 기능을 덧붙이는 것으로 사용된다. 대표적으로 데코레이터 패턴이 쓰이는 곳은 가장 많이 사용하는 자바의 I/O 클래스이다.
 
 ```java
@@ -1555,7 +1555,7 @@ public class MicrowaveTest {
 }
 ```
 
-- 위코드를 테스트해보면, 그냥 전자레인지 타이머를 10초 설정을 하고 그냥 on하기만 하면 아래와 같은 결과를 확인할 수 있다.
+- 위 코드를 테스트해보면, 그냥 전자레인지 타이머를 10초 설정을 하고 그냥 on하기만 하면 아래와 같은 결과를 확인할 수 있다.
 
 ```
 Microwave On
@@ -1582,7 +1582,7 @@ Microwave Off
 
 <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/facade2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
-- 위클래스 다이어그램과 같이 전자레인지를 사용하는 MicrowaveTest(User) 클래스에서는 전자레인지의 내부 부품들이 MicrowaveFacade 클래스에 감싸져 있지만 제공되는 인터페이스(on, off 버튼 등)를 통해 간편하게 사용할 수 있다.
+- 위 클래스 다이어그램과 같이 전자레인지를 사용하는 MicrowaveTest(User) 클래스에서는 전자레인지의 내부 부품들이 MicrowaveFacade 클래스에 감싸져 있지만 제공되는 인터페이스(on, off 버튼 등)를 통해 간편하게 사용할 수 있다.
 
 ### 사용용도
 - 퍼사드 패턴은 퍼사드 클래스가 서브 시스템 클래스들을 캡슐화를 해주는 기능을 제공하는 것 보다, 서브시스템 기능들을 편리하게 사용할 수 있는 인터페이스를 제공하는 것이 주된 목적이다.
