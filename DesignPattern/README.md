@@ -605,7 +605,7 @@ class FRShoesIngredientFactory implements ShoesIngredientFactory {
 }
 ```
 
-이번에도 지난 팩토리 메서드떄와 동일하게 일본과 플랑스를 기준으로 설명하려고 한다.
+이번에도 지난 팩토리 메서드때와 동일하게 일본과 플랑스를 기준으로 설명하려고 한다.
 일본 매장으로 가는 신발재료 공장 클래스와 프랑스 매장으로 가는 신발재료 공장 클래스처럼 재료 공장 인터페이스를 구현하는 클래스를 만들었다.</br>
 그리고 공장에서 각 메서드들이 return해주는 각가의 신발 재료들이 구현해야하는 인터페이스는 아래와 같다.
 
@@ -789,7 +789,7 @@ class RedShoes extends Shoes {
 이제는 더 이상 국가별로 BlackShoes, BrownShoes, RedShoes 각각 다 만들어주지 않아도 된다.</br>
 이 클래스들은 ShoesIngredientFactory 인스턴스를 생성자로 받아서 이 인스턴스로부터 원재료를 직접 받게된다.</br>
 추상 메서드여서 오버라이딩하여 구현해준 assembling 메서드를 보면 가죽과 밑창을 각각 공장 인스턴스에서 받아 조립하고 있음을 볼 수 있다.</br>
-여기에서 주목할점은 Shoes 클래스는 그냥 공장에서 건네주는 재료로 신발을 조립만하기 떄문에, 어떤 지역의 팩토리를 사용하든 Shoes 클래스는 언제든 재활용할 수 있다는 것이다.
+여기에서 주목할점은 Shoes 클래스는 그냥 공장에서 건네주는 재료로 신발을 조립만하기 때문에, 어떤 지역의 팩토리를 사용하든 Shoes 클래스는 언제든 재활용할 수 있다는 것이다.
 
 ```java
 abstract class ShoesStore {
@@ -1203,7 +1203,7 @@ public class Americano extends Beverage {
 - 또한 hasMilk가 boolean이다 보니 옵션을 2번이상 추가할 수 없다. 그렇기 때문에 total += milk500 + shot500 + ...; 처럼 사용할 수 있게 int형으로 변경이 필요해 보인다.
 - 그래서 위 설계는 객체지향 설계 5대 원칙 [SOLID](https://github.com/dltkd1395/CS-study/tree/main/OOP#oop%EC%9D%98-5%EA%B0%80%EC%A7%80-%EC%84%A4%EA%B3%84-%EC%9B%90%EC%B9%99)중 특히, 2번째 [OPC](https://github.com/dltkd1395/CS-study/tree/main/OOP#ocp)를 완전히 위반한 설계이다.
 
-> OCP(Open-Closed Principle) : 클래스는 확장에 대해서는 열려 있고, 변경에 대해서는 닫혀 있어야한다. 즉, 새로운 기능을 추가하려 할 떄, 기존 슈퍼 클래스는 수정하지 않고 확장을 통해 간단하게 추가할 수 있도록 한다.
+> OCP(Open-Closed Principle) : 클래스는 확장에 대해서는 열려 있고, 변경에 대해서는 닫혀 있어야한다. 즉, 새로운 기능을 추가하려 할 때, 기존 슈퍼 클래스는 수정하지 않고 확장을 통해 간단하게 추가할 수 있도록 한다.
 
 - 그래서 프로그램을 데코레이ㅓ 패턴을 젹용해 새롭게 설계하려 한다.
 
@@ -1353,7 +1353,7 @@ public class Customer {
 > 가격 : 7300
 
 - 라고 나올 것이다.
-- 코드에서 보았듯이 옵션을 추가할 떄 자신의 인스턴스를 다시 전달함으로써, JavaChip - Whip - Cream - Shot - Shot - CaffeMocha로 감싸지는 형태로 객체가 생성되게 된다. 옵션들의 Beverage 타입의 beverage 멤버를 계속 다음으로 전달하여 저런 형태의 체인이 만들어 지게 되는데, 
+- 코드에서 보았듯이 옵션을 추가할 때 자신의 인스턴스를 다시 전달함으로써, JavaChip - Whip - Cream - Shot - Shot - CaffeMocha로 감싸지는 형태로 객체가 생성되게 된다. 옵션들의 Beverage 타입의 beverage 멤버를 계속 다음으로 전달하여 저런 형태의 체인이 만들어 지게 되는데, 
 - 이때 제일 외부의 JavaChip 객체의 getDescription 메서드를 실행시키면, beverage에 저장되어 있는 Whip 객체의 getDescription으로, 그리고 이어서 Cream 객체에 있는 getDecription 메서드가 차례로 호출되어 최종적으로 CaffeMocha 객체까지 도달하여 CaffeMocha 객체의 getDescription 메서드까지 호출하는 것이다.
 - 그리고 리턴은 CaffeMocha 객체에 있는 description부터 차례로 리턴되면서 2개의 Shot 객체와 Cream 객체를 거치며 문자열이 계속 더해져 최종적으로 "카페모카, 샷, 샷, 크림, 휘핑크림, 자바칩" 라는 문자열이 완성된다.
 - cost 메서드 또한 마찬가지로 호출이 자바치 -> ... -> 카페모카로 파고들어가서 카페모카에서부터 차근차근 가격이 더해진다.
@@ -1637,7 +1637,7 @@ Microwave Off
 
 <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/composite4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
-- Composite Pattern의 구조는 위에서 설명했듯 트리구조이고, 크게 4가지로 구조를 구분할 수 있다.
+- Composite Pattern의 구조는 위에서 설명했듯이 트리구조이고, 크게 4가지로 구조를 구분할 수 있다.
 1. `Component` : Component인터페이스는 트리의 단일 객체(like `Product`)와 복합 객체(like `Box`) 모두에게 공통 인터페이스를 제공한다.
 2. `Leaf` : Leaf는 일반적인 트리구조에서 Leaf Node와 같은 의미이다. Composite Pattern에서 Leaf는 트리의 단순 요소(like `Product`)만으로 이루어져 있으므로 대부분의 실제 작업을 수행한다.
 3. `Container` : Container는 Composite와 동일한 의미이며, Container는 하위 요소들을 가진 요소(like `작은 Box`를 가진 `Box`)이다.</br> 자식들의 구체적인 클래스를 알지못하며 공통 인터페이스를 통해 모든 하위 요소와 함께 작동한다. </br> 요청을 받으면 본인이 처리할 수 있는 부분은 직접 처리하고, 하위 요소중 자신과 같은 Container가 있다면 자식 Container에게 작업을 위임하여 결과를 리턴받고 결과를 종합하여 응답한다.
@@ -1717,7 +1717,7 @@ public class Main {
 ### 단점
 - 설계를 일반화 시켜 객체간의 구분, 제약이 힘들다.
   
-- 정리하자면, 컴포지트 패턴의 장점은 사용자 입장에서는 이게 단일 객체인지 복합 객체인지 신경쓰지 않고 사용할 수 있다는 장점이 있지만 설계가 지나치게 범용성을 갖기 때문에 새로운 요소를 추가할 떄 복합 객체에서 구성 요소에 제약을 갖기가 힘들다.
+- 정리하자면, 컴포지트 패턴의 장점은 사용자 입장에서는 이게 단일 객체인지 복합 객체인지 신경쓰지 않고 사용할 수 있다는 장점이 있지만 설계가 지나치게 범용성을 갖기 때문에 새로운 요소를 추가할 때 복합 객체에서 구성 요소에 제약을 갖기가 힘들다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
 
@@ -1725,7 +1725,7 @@ public class Main {
 
 ### Adapter
 
-- 어댑터 패턴(Adapter Pattern)이란 - 한 글래스의 인터페이스를 클라이언트에서 사용하고자 할 떄, 다른 인터페이스로 변환시켜 사용하는 패턴이다.
+- 어댑터 패턴(Adapter Pattern)이란 - 한 클래스의 인터페이스를 클라이언트에서 사용하고자 할 때, 다른 인터페이스로 변환시켜 사용하는 패턴이다.
 - 어댑터를 이용하면 인터페이스 호환성 문제 때문에 같이 쓸 수 없는 클래스들을 연결해서 쓸 수 있다.
 - 어댑터 패턴은 우리가 여행용 전원 어댑터를 생각해보면 이해가 쉽다.
 - 우리가 사용하는 휴대폰, 노트북 충전기는 220V 동그란 돼지코 한국의 표준 플러그를 사용하지만, 전세게별로 이 플러그 표준이 각기 다 다르다.
@@ -1772,7 +1772,7 @@ public interface VideoPlayer{
 ```
 
 ```java
-public class MP3 implements VideoPlayer{
+public class MP4 implements VideoPlayer{
    
    @Override
    void play(String filename){
