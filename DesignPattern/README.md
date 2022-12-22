@@ -540,6 +540,7 @@ class DependentShoesStore {
 - 이렇게 하면 고수준 컴포넌트 ShoesStore와 저수준 컴포넌트인 각종 구두 객체들 모두 추상클래스인 Stores에 의존하게 된다.
 - 하지만 설계를 하다보면 의존관계 역전 원칙을 지키도록 설계하기가 쉽지 않다.
 - 그래서 의존 관계 역전원칙을 지키는데 도움이 될만한 가이드 라인을 가져왔다.
+  
 > 1. 어떤 변수라도 구상 클래스에 대한 레퍼런스를 저장하지 말것
 > - new 연산자 사용하면 구상 클래스 레퍼런스를 저장하는 것, 이것 대신 팩토리를 사용하라!!
 > 2. 구상 클래스에서 유도된 클래스를 만들지 말 것.
@@ -547,10 +548,12 @@ class DependentShoesStore {
 > 3. 베이스 클래스에서 이미 구현되어 있던 메서드를 오버라이드 하지 말 것.
 > - 이미 구현되어 있는 메서드를 오버라이드 하는 것은 애초부터 베이스 클래스가 잘 추상화되어 있는 것이 아니다!
 > - 베이스 클래스에서 메서드를 정의 할때는 모든 서브클래스에서 공유할 수 있는 것들만 정의 해야한다.
+
 - 하지만 위 가이드 라인들은 지향하면 좋다는 것이고, 꼭 지켜져야 하는 것은 아니다.
 - 실제로 자바 프로그램 가운데 이것을 완벽하게 지키는 것은 거의 없다!!
 - 위와 같이 설계하는 것이 바람직하다는 것은 알고 넘어가는 것이 좋다.
 </br></br>
+
 다시  구두 가계로 돌아와서, 우려했던 대로 신발매장이 더 많은 나라에 진출해서 인도, 이태리, 중국 등등 많은 곳에 매장이 생긴다고 가정해보자.</br></br>
 하지만 몇몇 분점에서는 각 현지 공장에서 싸구려 재료들을 몰래 사용해서 본사에서 의도하지 않은 마진을 몰래 올리고 있다는 소식을 듣고 무언가 조치를 취하려고 한다.</br></br>
 그래서 본사에서 원재료를 사용해서 신발을 만들어서 분점으로  배송하려고 했는데 지난 팩토리 메서드를 정리한 부분에서 먼저 보았듯이, 같은 검은 구두라고 하더라도 일본매장의 검은 신발과 프랑스매장의 검은 신발의 밑창은 서로 다르게 만들어야하고 따라서 재료들도 달라져서 문제가 생긴다.</br></br>
@@ -567,7 +570,9 @@ interface ShoesIngredientFactory {
  
 }
 ```
+
 그래서 위와 같은 공통 기능을 제공할 신발재료 공장 인터페이스를 만들어 주었다.
+
 
 ```java
 class JPShoesIngredientFactory implements ShoesIngredientFactory {
@@ -598,9 +603,11 @@ class FRShoesIngredientFactory implements ShoesIngredientFactory {
  
 }
 ```
+
 이번에도 지난 팩토리 메서드떄와 동일하게 일본과 플랑스를 기준으로 설명하려고 한다.
 일본 매장으로 가는 신발재료 공장 클래스와 프랑스 매장으로 가는 신발재료 공장 클래스처럼 재료 공장 인터페이스를 구현하는 클래스를 만들었다.</br>
 그리고 공장에서 각 메서드들이 return해주는 각가의 신발 재료들이 구현해야하는 인터페이스는 아래와 같다.
+
 ```java
 interface Bottom {
  
@@ -616,7 +623,9 @@ interface Leather {
  
 }
 ```
+
 위 재료 인터페이스를 구현한 클래스는 아래와 같다.
+
 ```java
 // 고무 밑창
 class RubberBottom implements Bottom {
@@ -656,7 +665,9 @@ class LeatherOfSheeps implements Leather {
  
 }
 ```
+
 이제는 공장은 완성됐고, 공장에서 만드는 신발 클래스를 살펴보도록 하자.
+
 ```java
 abstract class Shoes {
  
@@ -685,7 +696,9 @@ abstract class Shoes {
  
 }
 ```
+
 위 Shoes 클래스에서 주목할 점은 원재료들을 조립하는 assembling이라는 추상 메서드이다.
+
 ```java
 abstract class Shoes {
  
@@ -708,7 +721,9 @@ abstract class Shoes {
  
 }
 ```
+
 지난번 팩토리 메소드에서 사용했던 Shoes.class에서는 존재하지 않는 메서드이다.
+
 ```java
 class BlackShoes extends Shoes {
  
@@ -768,11 +783,13 @@ class RedShoes extends Shoes {
  
 }
 ```
+
 위 클래스들은 보다시피 Shoes 추상 클래스를 구현한 각 컬러들의 Shoes 클래스이다.</br>
 이제는 더 이상 국가별로 BlackShoes, BrownShoes, RedShoes 각각 다 만들어주지 않아도 된다.</br>
 이 클래스들은 ShoesIngredientFactory 인스턴스를 생성자로 받아서 이 인스턴스로부터 원재료를 직접 받게된다.</br>
 추상 메서드여서 오버라이딩하여 구현해준 assembling 메서드를 보면 가죽과 밑창을 각각 공장 인스턴스에서 받아 조립하고 있음을 볼 수 있다.</br>
 여기에서 주목할점은 Shoes 클래스는 그냥 공장에서 건네주는 재료로 신발을 조립만하기 떄문에, 어떤 지역의 팩토리를 사용하든 Shoes 클래스는 언제든 재활용할 수 있다는 것이다.
+
 ```java
 abstract class ShoesStore {
  
@@ -793,9 +810,11 @@ abstract class ShoesStore {
  
 }
 ```
+
 고객에게 주문을 받을 수 있는 Store 클래스를 만들어 보았다.</br>
 각 나라의 스토어들은 이 Store 추상 클래스를 상속받아 추상 메서드인 makeShoes 메서드를 각 나라에 맞게 오버라이드하여 구현해주면 된다.</br>
 orderShoes는 전세계 공통 프레임워크이고, orderShoes안에 있는 makeShoes단계만 각 나라의 특징에 맞게 바뀌는 것뿐이다.
+
 ```java
 class JPShoesStore extends ShoesStore {
  
@@ -849,6 +868,7 @@ class FRShoesStore extends ShoesStore {
  
 }
 ```
+
 일본과 프랑스 신발 매장을 ShoesStore클래스를 상속받아 만들어주었다.</br>
 각 매장은 makeShoes를 오버라이딩하여 현지 상황에 맞게 재정의한다.</br>
 makeShoes내부 프로세스를 살펴보면, 먼저 매장으로 신발 주문이 들어오면 현지 공장 인스턴스를 생성한다.</br>
@@ -857,6 +877,7 @@ makeShoes 메서드에서 재료를 공장에서 모두 받아왔다면, 이제�
 위 고정이 전세계 공통 orderShoes 프레임워크이다.</br>
 이제는 신발공장과 매장, 신발까지 모든 설계가 마무리 되었다.</br>
 실제 주문을 하는 과정을 살펴보며 이번 추상 팩토리 패턴을 마무리하려고 한다.
+
 ```java
 public class Main {
  
@@ -872,7 +893,9 @@ public class Main {
  
 }
 ```
+
 위 주문 코드를 실행해보면 출력은 아래와 같을 것이다.
+
 ```
 > 신발을 제작중입니다. 일본 스타일의 검은 신발
 > 신발 정보 : 밑창은 고무 사용 하였으며, 가죽은 소가죽 사용하였습니다.
@@ -883,6 +906,7 @@ public class Main {
 > 완성된 신발을 준비 중입니다.
 > 준비된 신발을 포장 중입니다.
 ```
+
 >일본 매장과 프랑스 매장으로 가서 신발를 주문을 한다고 하자.</br>
 >먼저 주문하는 일본 매장에서 검은 신발을 주문하면, 매장에서는 주문을 받고 (orderShoes)</br>
 >주문을 받은 직원은 일본 매장을 담당하는 원재료 공장에 해당 신발에 알맞는 재료를 요청한다. (makingShoes)</br>
