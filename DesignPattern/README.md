@@ -1371,3 +1371,5 @@ br.readLine();
 ```
 
 - 처럼 데코레이터 패턴이 적용됨을 알 수 있다.
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
