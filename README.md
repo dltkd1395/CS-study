@@ -38,7 +38,7 @@
     - [Interpreter](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#interpreter)
     - [Template Method](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#template-method)
     - Chain of Responsibillity
-    - Command
+    - [Command](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#command)
     - Iterator
     - Mediator
     - Memento
