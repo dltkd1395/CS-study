@@ -44,5 +44,5 @@
     - Memento
     - [Observer](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#observer)
     - [Strategy](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#strategy)
-    - Strategy
+    - [State](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#state)
     - Visitor
