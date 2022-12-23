@@ -35,7 +35,7 @@
 ---
 
 3. **행위 패턴**
-    - Interpreter
+    - [Interpreter](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#interpreter)
     - Teplate Method
     - Chain of Responsibillity
     - Command
