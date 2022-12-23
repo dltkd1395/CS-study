@@ -43,6 +43,6 @@
     - Mediator
     - Memento
     - [Observer](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#observer)
-    - State
+    - [Strategy](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#strategy)
     - Strategy
     - Visitor

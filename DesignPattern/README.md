@@ -40,7 +40,7 @@
 - Mediator
 - Memento
 - [Observer](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#observer)
-- Strategy
+- [Strategy](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#strategy)
 - State
 - Visitor
 
@@ -2903,5 +2903,182 @@ public class WeatherStation {
 </br>
 
 +) Observer 패턴은 모델-뷰-컨트롤러(Model-View-controller, MVC) 패러다임과 자주 결합된다. Observer 패턴은 MVC에서 모델과 뷰 사이를 느슨히 연결하기 위해 사용된다. 대표적으로 모델에서 일어나는 이벤트를 통보받는 Observer는 뷰의 내용을 바꾸는 스위치를 작동시킨다.
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
+
+---
+
+### Strategy
+
+- Strategy Pattern은 객체들의 행위를 클래스로 만들어서 캡슐화한 뒤, 행위의 변겨이나 수정이 필요할 때 동적으로 행위를 바꿀 수 있도록 하는 디자인 패턴이다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/strategy1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+### Strategy Pattern 사용 예
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/strategy2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+```java
+public abstract class Robot {
+  private String name;
+  public Robot(String name) { this.name = name; }
+  public String getName() { return name; }
+  // 추상 메서드
+  public abstract void attack();
+  public abstract void move();
+}
+
+public class TaekwonV extends Robot {
+  public TaekwonV(String name) { super(name); }
+  public void attack() { System.out.println("I have Missile."); }
+  public void move() { System.out.println("I can only walk."); }
+}
+public class Atom extends Robot {
+  public Atom(String name) { super(name); }
+  public void attack() { System.out.println("I have strong punch."); }
+  public void move() { System.out.println("I can fly."); }
+}
+```
+
+```java
+public class Client {
+  public static void main(String[] args) {
+    Robot taekwonV = new TaekwonV("TaekwonV");
+    Robot atom = new Atom("Atom");
+
+    System.out.println("My name is " + taekwonV.getName());
+    taekwonV.move();
+    taekwonV.attack();
+
+    System.out.println()
+    System.out.println("My name is " + atom.getName());
+    atom.move();
+    atom.attack();
+  }
+}
+```
+
+### Atom이 움직이는 방법을 수정한다면?
+
+```java
+public class Atom extends Robot {
+  public Atom(String name) { super(name); }
+  public void attack() { System.out.println("I have strong punch."); }
+
+  //public void move() { System.out.println("I can fly."); }
+  public void move() { System.out.println("I can only walk."); } // 수정
+}
+```
+
+- move()를 수정하려면 기존 코드의 내용을 수정해야 하므로 OCP에 위배된다.
+- 상속을 통한 메서드 overriding 구현은 중복 코드가 발생하기 쉽다.
+  - TaekwonV와 Atom의 move() 메서드 내용이 중복된다.
+  - 새로운 방식으로 수정하려면 중복 코드를 모두 수정해야 한다.
+
+### 해결방안
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/strategy3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+-  변화되는 것을 찾고 이를 클래스로 캡슐화한다.
+   -  변화되는 것: attack(), move()
+   -  공격과 이동을 위한 인터페이스를 만들고 이들을 구현한 클래스를 만들어서 캡슐화
+-  strategy 멤버 변수를 추가하고 setter로 넣어준다
+   -  공격과 이동을 상속받는 것이 아니라 외부 타입의 멤버 변수로 만든다
+   -  상속이 아닌 구성으로 setter를 통해 동적으로 바인딩이 가능하다.
+   -  Robot에 새로운 공격과 이동 방법을 추가할 때 Robot 구현 클래스를 수정하지 않아도 된다.
+   -  OCP를 만족
+
+```java
+public abstract class Robot {
+private String name;
+private AttackStrategy attackStrategy;
+private MovingStrategy movingStrategy;
+
+public Robot(String name) { this.name = name; }
+public String getName() { return name; }
+public void attack() { attackStrategy.attack(); }
+public void move() { movingStrategy.move(); }
+
+// setter 메서드
+public void setAttackStrategy(AttackStrategy attackStrategy) {
+  this.attackStrategy = attackStrategy; }
+public void setMovingStrategy(MovingStrategy movingStrategy) {
+  this.movingStrategy = movingStrategy; }
+}
+
+```
+
+```java
+public class TaekwonV extends Robot {
+	public TaekwonV(String name) { super(name); }
+}
+
+public class Atom extends Robot {
+	public Atom(String name) { super(name); }
+}
+```
+
+```java
+// 인터페이스
+interface AttackStrategy { public void attack(); }
+
+// 구체적인 클래스
+public class MissileStrategy implements AttackStrategy {
+  public void attack() { System.out.println("I have Missile."); }
+}
+
+public class PunchStrategy implements AttackStrategy {
+  public void attack() { System.out.println("I have strong punch."); }
+}
+```
+
+```java
+// 인터페이스
+interface MovingStrategy { public void move(); }
+
+// 구체적인 클래스
+public class FlyingStrategy implements MovingStrategy {
+  public void move() { System.out.println("I can fly."); }
+}
+
+public class WalkingStrategy implements MovingStrategy {
+  public void move() { System.out.println("I can only walk."); }
+}
+```
+
+```java
+public class Client {
+	public static void main(String[] args) {
+      Robot taekwonV = new TaekwonV("TaekwonV");
+      Robot atom = new Atom("Atom");
+
+      /* 수정된 부분: 전략 변경 방법 */
+      taekwonV.setMovingStrategy(new WalkingStrategy());
+      taekwonV.setAttackStrategy(new MissileStrategy());
+      atom.setMovingStrategy(new FlyingStrategy());
+      atom.setAttackStrategy(new PunchStrategy());
+
+      /* 아래부터는 동일 */
+      System.out.println("My name is " + taekwonV.getName());
+      taekwonV.move();
+      taekwonV.attack();
+
+      System.out.println()
+      System.out.println("My name is " + atom.getName());
+      atom.move();
+      atom.attack();
+	}
+}
+```
+
+### 장점
+- 동적으로 Context의 행위를 변경할 수 있다.
+- Context 코드의 변경 없이 새로운 Strategy를 추가하여 수정할 수 있다.
+  - OCP를 만족한다.
+
+### 단점
+- Strategy 객체와 Context 객체 사이에 통신 오버헤드가 생긴다.
+  - Context객체는 사용하지 않는 Strategy 정보도 갖게 된다.
+- 객체 수가 증간한다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
