@@ -1641,7 +1641,7 @@ Microwave Off
 1. `Component` : Component인터페이스는 트리의 단일 객체(like `Product`)와 복합 객체(like `Box`) 모두에게 공통 인터페이스를 제공한다.
 2. `Leaf` : Leaf는 일반적인 트리구조에서 Leaf Node와 같은 의미이다. Composite Pattern에서 Leaf는 트리의 단순 요소(like `Product`)만으로 이루어져 있으므로 대부분의 실제 작업을 수행한다.
 3. `Container` : Container는 Composite와 동일한 의미이며, Container는 하위 요소들을 가진 요소(like `작은 Box`를 가진 `Box`)이다.</br> 자식들의 구체적인 클래스를 알지못하며 공통 인터페이스를 통해 모든 하위 요소와 함께 작동한다. </br> 요청을 받으면 본인이 처리할 수 있는 부분은 직접 처리하고, 하위 요소중 자신과 같은 Container가 있다면 자식 Container에게 작업을 위임하여 결과를 리턴받고 결과를 종합하여 응답한다.
-4. `Client` : Client Component 인터페이스를 통해 모든 구성요소와 함꼐 작동한다. 결과적으로 Client는 트리의 단순 요소 또는 복잡한 요ㅗ소 모두에 대해 동일한 방식으로 작업할 수 있게 된다.
+4. `Client` : Client Component 인터페이스를 통해 모든 구성요소와 함꼐 작동한다. 결과적으로 Client는 트리의 단순 요소 또는 복잡한 요소 모두에 대해 동일한 방식으로 작업할 수 있게 된다.
 
 
 ### Implementation
@@ -1866,10 +1866,10 @@ public class Main{
 - BNF는 컴퓨터 언어에서 언어의 문법을 수학적인 수식으로 나타낼 때 사용하는 언어 도구이다.
 - 대부분의 언어 구조가 BNF 형태로 펴햔할 수 있기 때문에 언어를 해석할 때 BNF 형태로 나타내는 경우가 많다.
 - 인터프리터 패턴도 BNF 구조의 언어를 해석할 수 있도록 디자인이 되었다.
+- 
+### (( not X ) and ( Y or Z )) 의 경우
 
 <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/interpreter1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
-
-### (( not X ) and ( Y or Z )) 의 경우
 
 [출처](https://palpit.tistory.com/entry/Design-Pattern-%EC%9D%B8%ED%84%B0%ED%94%84%EB%A6%AC%ED%84%B0Interpreter-%ED%8C%A8%ED%84%B4-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4)
 
