@@ -2670,7 +2670,7 @@ public class MenuTestDrive {
 
 ### Observer 패턴이란?
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/observer1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/observer1.png" style="max-width: 50%; display: inline-block;" data-target="animated-image.originalImage">
 
 - 객체의 상태 변화를 관찰하는 관찰자들, 즉 옵저버들의 목록을 객체에 등록하여 상태 변화가 있을 때 마다 메서드 등을 통해 `객체가 직접 목록의 각 옵저버에게 통지`하도록 하는 디자인 패턴이다. 주로 분산 이벤트 핸들링 시스템을 구현하는 데 사용된다. `발행/구독 모델`로 알려져 있기도 하다.
 - 즉, 한 객체의 상태 변화에 따라 다른 객체의 상태도 연동되도록 `일대다(one-to-many) 객체 의존 관계`를 구성하는 패턴
