@@ -33,7 +33,7 @@
 ### **3. 행위 패턴**
 
 - [Interpreter](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#interpreter)
-- Template Method
+- [Template Method](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#template-method)
 - Chain of Responsibillity
 - Command
 - Iterator
@@ -1984,5 +1984,122 @@ public class Main {
 	}
 }
 ```
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
+
+---
+
+### Template Method
+
+- 템플릿 메서드 패턴은 알고리즘의 구조를 메서드에 정의하고, 하위 클래스에서 알고리즘 구조의 변경없이 알고리즘을 재정의하는 디자인 패턴이다.
+- 알고리즘이 단계별로 나누어지거나 같은 역할을 하는 메서드이지만 여러 곳에서 다른 형태로 사용이 필요한 경우 유용하게 사용된다.
+- 변하지 않는 기능을 상위 클래스에 만들어두고 상속해 사용하고 자주 변경하며 확장할 기능은 하위 클래스에서 만들도록 하는 방식이다.
+- 구현 방식은 추상클래스와 구현 클래스로 작성하며, 메인이 되는 로직 부분은 추상 클래스의 일반 메서드로 선언해서 사용한다. 그 후 구현마다 달라질 수 있는 메서드들은 구현 클래스에서 선언 후 호출하는 방식으로 사용된다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/template1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+```java
+//AbstractClass.java
+public abstract class AbstractClass {
+    
+    protected abstract void hook1();
+    
+    protected abstract void hook2();
+    
+    public void templateMethod() {
+        hook1();
+        hook2();
+    }
+    
+}
+//ConcreteClass.java
+public class ConcreteClass extends AbstractClass {
+
+    @Override
+    protected void hook1() {
+        System.out.println("ABSTRACT hook1 implementation");
+    }
+
+    @Override
+    protected void hook2() {
+        System.out.println("ABSTRACT hook2 implementation");
+    }
+
+}
+//TemplateMethodPatternClient.java
+public class TemplateMethodPatternClient {
+    public static void main(String[] args) {
+        AbstractClass abstractClass = new ConcreteClass();
+        abstractClass.templateMethod();
+    }
+}
+```
+
+### 장점
+1. 코드의 중복 제거
+2. 자식 클래스의 역할을 줄여서 핵심 로직의 관리가 용이
+3. 코드를 객체지향적으로 구성할 수 있다
+
+예제 AbstractMap<K,V>
+### 단점
+1. 추상 메서드가 많아져 클래스 관리가 복잡하다
+2. 클래스간의 관계와 코드가 꼬일 수 있다.
+
+```java
+public V get(Object key) {
+    Iterator<Entry<K,V>> i = entrySet().iterator();
+    if (key==null) {
+        while (i.hasNext()) {
+            Entry<K,V> e = i.next();
+            if (e.getKey()==null)
+                return e.getValue();
+        }
+    } else {
+        while (i.hasNext()) {
+            Entry<K,V> e = i.next();
+            if (key.equals(e.getKey()))
+                return e.getValue();
+        }
+    }
+    return null;
+}
+```
+
+HashMap<K,V> extends AbstractMap<K,V> 의 get()
+
+```java
+public V get(Object key) {
+    Node<K,V> e;
+    return (e = getNode(hash(key), key)) == null ? null : e.value;
+}
+```
+
+public class TreeMap<K,V> extends AbstractMap<K,V> 의 get() 메소드
+
+```java
+public V get(Object key) {
+    Entry<K,V> p = getEntry(key);
+    return (p==null ? null : p.value);
+}
+```
+
+### 추상클래스 vs 인터페이스(Java8 기준)
+- 추상클래스와 인터페이스는 인스턴스화 하는 것은 불가능하며, 구현부가 있는 메서드와 없는 메서드 모두 가질 수 있다는 점에서 유사하다.
+- 인터페이스에서 모든 변수는 기본적으로 public static final이며, 모든 메서드는 public abstract인 반면 추상클래스에서는 static이나 final이 아닌 필드를 지정할 수 있고, public, protected, private 메서드를 가질 수 있다.
+- 인터페이스를 구현하는 어떤 클래스는, 다른 여러 개의 인터페이스들을 구현할 수 있다. 추상클래스는 상속을 통해 구현되는데, 자바에서는 다중상속을 지원하지 않으므로 추상클래스를 상속받은 서브클래스는 다른 클래스를 상속받을 수 없다.
+
+### 추상클래스, 인터페이스 사용 예시
+
+**추상클래스**
+
+- 관련성이 높은 클래스 간에 코드를 공유하고 싶은 경우
+- 추상클래스를 상속받은 클래스들이 공통으로 가지는 메서드와 필드가 많거나, public 이외의 접근제어자(protected, private) 사용이 필요한 경우
+- non-static, non-final 필드 선언이 필요한 경우, 즉, 각 인스턴스에서 state 변경을 위한 메서드를 선언할 수 있다.
+
+**인터페이스**
+
+- 서로 관련성이 없는 클래스들이 인터페이스를 구현하게 되는 경우에 사용된다. 예를 들어, comparable, Cloneable 인터페이스는 여러 클래스들에서 구현되는데, 구현클래스들 간에 관련성이 없는 경우가 대부분이다.
+- 특정 데이터 타입의 행동을 명시하고 싶은데, 어디서 그 행동이 구현되는지는 신경쓰지 않는 경우.
+- 다중상속을 허용하고 싶은 경우
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
