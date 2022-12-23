@@ -42,7 +42,7 @@
     - [Iterator](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#iterator)
     - Mediator
     - Memento
-    - Observer
+    - [Observer](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#observer)
     - State
     - Strategy
     - Visitor
