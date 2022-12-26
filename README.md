@@ -55,7 +55,7 @@
     3. [공인 IP, 사설 IP](https://github.com/dltkd1395/CS-study/tree/main/Network#공인-ip-사설-ip)
 3. [TCP/IP](https://github.com/dltkd1395/CS-study/tree/main/Network#tcpip)
 4. [UDP](https://github.com/dltkd1395/CS-study/tree/main/Network#udp)
-5. 대칭키 & 공개키
+5. [대칭키 & 공개키](https://github.com/dltkd1395/CS-study/tree/main/Network#대칭키-공개키)
 6. Load Balancing
 7. Blocking/Non-Blocking & Synchronous/Asynchronous I/O
 8. 웹 동작 방식

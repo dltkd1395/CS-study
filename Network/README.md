@@ -6,7 +6,7 @@
     3. [공인 IP, 사설 IP](https://github.com/dltkd1395/CS-study/tree/main/Network#공인-ip-사설-ip)
 3. [TCP/IP](https://github.com/dltkd1395/CS-study/tree/main/Network#tcpip)
 4. [UDP](https://github.com/dltkd1395/CS-study/tree/main/Network#udp)
-5. 대칭키 & 공개키
+5. [대칭키 & 공개키](https://github.com/dltkd1395/CS-study/tree/main/Network#대칭키-공개키)
 6. Load Balancing
 7. Blocking/Non-Blocking & Synchronous/Asynchronous I/O
 8. 웹 동작 방식
@@ -523,5 +523,125 @@ NAT에는 Basic NAT와 NAPT 2 종류가 있고 대개 NAT라고 하면 NAPT 방�
 - **발신/수신 포트번호**가 존재하고 바이트 단위의 길이가 있다.
 - **체크섬**은 선택 항목이며 체크섬 값이 0이면 수신측은 체크섬 계산을 하지 않는다.
 - 기본적으로 UDP 헤더는 고정 크기의 8 바이트만 사용하며 헤더 처리에 많은 시간이 들지 않는다.
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
+
+---
+
+### 대칭키-공개키
+
+### 네트워크 보안
+
+- secure communication을 위해서는 다음의 원칙들을 고려해야한다.
+1. 기밀성 송신자와 정해진 수신자만이 전송된 메세지의 내용을 이해할 수 있어야한다.
+2. 메세지 무결성 송신자와 수신자 사이의 메세지는 중간에 변형되면 안된다.
+3. 엔드포인트 인증 발신자와 수신자 모두 통신에 관련된 상대방(End-point)의 신원을 확인할 수 있어야한다.
+4. 운영 보안 공격자가 바이러스를 심거나 보안사항을 얻으려는 시도를 하거나, DoS 공격을 시도하는 등을 할 수 없게 안전하게 운영되어야한다.
+
+이 중 대칭키와 비대칭키는 1번 원칙인 기밀성을 위해 사용되는 도구이다. </br>
+
+### 암호화의 원칙
+
+- 다음은 암호화의 요소에 대한 그림이다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/key1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- Alice는 암호화 알고리즘에 input으로 들어갈 key를 제공한다. 이 때, key는 숫자와 문자로 구성된 문자열이다. 이 암호화 알고리즘은 송신자의 키와 plaintext 메세지를 받아서 output으로 암호문을 만들어낸다. 복호화 알고리즘은 암호화 알고리즘을 통해 만들어진 암호문을 수신자의 키를 이용해서 plaintext 메세지로 바꿔준다. 이런 과정에서 사용되는 키는 대칭키와 비대칭키가 있다.
+
+> 대칭키 : 수신자와 송신자의 키가 동일하다. 
+> 공개키 : 수신자와 송신자의 키가 쌍으로 사용된다.
+
+### 대칭키
+
+**stream 암호**
+
+- plaintext와 같은 길이의 키 스트림을 생성해서 비트단위로 XOR연산을 수행한다. 오류 확산의 위험이 없고, 이동통신 환경에서 구현이 용이해서 무선 데이터 보호에 많이 사용된다. 실시간성이 중요한 음성, 영상, 스트리밍 전송에 사용된다. 비트 단위로 암호화를 진행해서 시간이 많이 걸리고, 데이터 흐름에 따라서 비트 단위로 순차적으로 처리해서 내부 상태를 저장하고 내부 상태를 저장하고 있어야한다는 단점이 있다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/key2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+### RC4
+- SSL/TLS나 네트워크 프로토콜에서 자주 사용되는 스트림 암호 기법으로 plaintext와 XOR연산을 진행할 pseudorandom stram을 만든다.
+- 256 바이트로 구성된 상태의 한 바이트는 암호화 키로서 사용되기 위해서 랜덤하게 선택이 된다.
+- 초기화는 256 바이트의 state vector를 0,1,2,...,254,255로 초기화한다. 초기화 한 후에 키 배열을 이용해서 상태배열에 대해 다음과 같이 swap을 해준다.
+  
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/key3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 이 swap 과정 중 S[i] + S[j]의 값에 해당하는 상태 배열의 인덱스의 원소를 키로 사용한다.
+
+### block 암호
+
+- 다양한 보안이 적용된 인터넷 프로토콜(ex. PGP, SSL, IPsec)에서 사용되는 암호이다. 블록 암호문에서는 암호화될 메세지는 k bit의 블록으로 처리된다. 예를 들면, k = 64인 경우에는 메세지는 64 비트의 블록 단위로 나눠지고, 각각의 블록들은 독립적으로 암호화된다.
+- 블록을 암호화 하기위해서는 암호는 일대일 매핑을 사용해서 k비트의 일반 텍스트 블록을 암호문의 k비트 블록에 매핑한다.
+- k = 3인 경우 아래와 같이 매핑할 수 있다. 이는 가능한 8!(=40320)가지 방법 중 한가지를 표시한 것이다.
+
+|input|output|input|output|
+|---|---|---|---|
+000|110|100|011|
+001|111|101|010|
+010|101|110|000|
+011|100|111|001|
+
+- 우리는 이런 각각의 매핑들을 키로 생각할 수 있다. 하지만 이처럼 작은 비트로 매핑을 하면 모든 경우의 수를 완전탐색으로 금방 찾아낼 수 있다. 이런 공격을 방지하기 위해서 k bit를 64비트나 그 이상의 비트수로 구성한다.
+
+- 비록 이런 적절한 k를 이용한 full-table block 암호가 강력한 대칭키 암호 스키마를 만들 수 있지만, 구현하는 것이 까다롭다. k bit를 사용하면 송신자와 수신자 모두 (2^k)!가지의 경우의 수로 구성된 테이블을 유지해야하는데, 이는 실행이 불가능하다. 어찌어찌해서 다 만들었다하더라도, 키를 바꿔버리면 다시 테이블을 생성해야한다.
+
+- 그래서 full-table 암호는 모든 입력과 출력 간에 미리 결정된 mapping을 제공하는 경우에만 사용한다.
+- 이런 점을 해결하기 위해서 블록 암호는 랜덤하게 조합된 테이블을 만드는 함수들을 사용한다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/key4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 위의 그림처럼 input을 다루기 쉬운 사이즈의 bit로 나눠서 매핑한다. 이렇게 나눠진 chunk들은 64비트의 블록으로 합쳐진 후에, 다시 한 번 섞여서 새로운 64-bit output을 만든다. 이렇게 만들어진 결과물은 64-bit input으로 사용되어 위 과정을 반복하고, 이 반복을 총 n번 반복한다. 이 떄, n번의 싸이클을 돌리는 목적은 각각의 input bit가 출력 비트의 대부분에 영향을 미치게하기 위함이다. (chunk 안에 있는 bit는 바뀌는 것이 없기 때문)
+
+### AES
+
+- AES는 128 비트 블록을 사용하고 128, 192, 256 비트 길이의 키를 사용할 수 있다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/key5.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 위 그림은 다음 4가지 단계를 표현한 것이다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/key6.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+1. SubByte : 바이트 단위 형태로 블록을 교환 cf) S-box
+2. Shift rows : 행과 행을 치환
+3. Mix columns : 열에 속한 모든 바이트를 순환 행렬을 사용해서 함수로 열에 있는 각 바이트를 대체해서 변화시킨다.
+4. Add round key : 확장된 키의 일부와 현재 블록을 비트별로 XOR 연산해준다.
+
+- 암호화와 복호화를 위해서 라운드 키 더하기 단계에서 시작해 10라운드를 수행한다. 9라운드 동안은 4단계를 모두 포함하는 반복을 수행한 후에 10번째에는 3단계(mix columns제외)로 구성된 반복을 수행한다.
+- 라운드 키를 더하는 단계에서만 키를 사용하기 때문에 각 라운드의 시작과 끝은 라운드 키를 더하는 단계가 된다.
+- 위의 4가지 단계는 비트를 뒤섞고 XOR 암호화 하는 것을 번갈아서 적용함으로서 효과적으로 보안성을 강화시킨다.
+- 암호화된 암호문은 암호의 역순으로 해독하면 평문을 얻어낼 수 있다.
+
+### 공개키 (Public Key)
+
+- 대칭키를 이용한 암호화 통신은 두 communicating 당사자들이 공통된 키를 공유한다. 이런 방법의 한가지 어려운 점은 두 참가자가 반드시 공유키에 대한 동의를 해야한다는 것이다. 참가자들이 처음 만나서 동의한 다음 그 후에 암호화로 통신이 가능할 것이다. 그러나 지금 세상에는 네트워크 없이 통신의 참여자가 직접 만나거나 소통을 할 수 없다. 그렇다면 두 참여자가 사전에 이미 알고 있는 비밀키 공유 없이 암호호 통신을 할 수 있는 방법은 무엇일까?
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/key7.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 그 때 사용하는 것이 공개키(Public key)이다. 공개키 구조는 네트워크에 참여하는 모두가 볼 수 있는 공개키와 수신자만 가지고 있는 개인키로 되어 있다. 공개키로 암호화되어진 암호문을 수신자의 개인키를 이용해서 복호하한다. 이런 특징 때문에, 공격자가 암호 알고리즘과 암호키를 알아도 복호키 계산이 불가능하다. 공개키를 이용해서 암호화를 할 때, 주로 RS 알고리즘을 이용해서 암호화한다.
+
+RSA는 소인수분해 연산을 이용한다.
+
+1. p와 q라고하는 2개의 서로 다른 충분히 큰 소수를 고릅니다.
+2. n = pq, z = (p-1)(q-1)을 계산합니다.
+3. n보다 작으면서 서로소인 정수 e를 찾습니다.
+4. 그 후 d*e를 z로 나눴을 대 나머지가 1인 정수 d(ed mod z = 1)를 구합니다.
+5. (n,e)는 공개키로 사용, (n,d)는 개인키로 사용 이 때, p와q를 이용해서 d,e를 계산하는 것이 가능하기 때문에, 보안상의 이유로 공개키와 개인키를 생성한 이후에는 p와 q를 지워버리는 것이 안전합니다.
+
+- 이 떄, e는 공개키에 이용되고, d는 개인키에 사용된다.
+
+> 암호화 C = (M^e)(mod N) M 은 송신자가 보내는 메세지이고, C는 암호화 값입니다. 이때 C의 비트 패턴은 수신자에게 보내는 암호문과 관련이 있습니다.
+> 복호화 M = (C^d)(mod N)
+
+다음은 love라는 단어를 암호화하고 복호화하는 과정을 나타낸 그림입니다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/key8.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 그렇다면 RSA는 어떻게 암호화 알고리즘으로서 역할을 할 수 있을까?
+
+1. c = (m^e) mod n
+2. [{(m^e) mod n}^d] mod n = (m^ed) mod n
+3. (m^ed) mod n = (m^(ed mod z) mod n) = m mod n = m
+4. (((m^d)mod n)^e) mod n = m^de mod n = m^ed mod n = (m^e mod n)^d mod n 위와 같이 (m^d mod n)^e와 (m^e mod n)^d 가 n에 대해서 합동이고, d와 n을 이용해서 e를 구할 수 있기 때문에 암호화 알고리즘으로서의 역할을 할 수 있습니다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
