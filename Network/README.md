@@ -5,7 +5,7 @@
     2. [IPv6](https://github.com/dltkd1395/CS-study/tree/main/Network#ipv6)
     3. [공인 IP, 사설 IP](https://github.com/dltkd1395/CS-study/tree/main/Network#공인-ip-사설-ip)
 3. [TCP/IP](https://github.com/dltkd1395/CS-study/tree/main/Network#tcpip)
-4. UDP
+4. [UDP](https://github.com/dltkd1395/CS-study/tree/main/Network#udp)
 5. 대칭키 & 공개키
 6. Load Balancing
 7. Blocking/Non-Blocking & Synchronous/Asynchronous I/O
@@ -473,5 +473,55 @@ NAT에는 Basic NAT와 NAPT 2 종류가 있고 대개 NAT라고 하면 NAPT 방�
 - **IP는 4바이트로 이루어진 컴퓨터 주소이며 3개의 마침표로 나누어진 숫자**로 표시된다.
 (예시 `127.0.0.1`)</br>
 - IP 주소는 하드웨어 고유의 식별 번호인 MAC 주소와 다르게 임시적으로 다른 주체(대부분 통신사)에게 받는 주소이므로 바뀔 수 있다.
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
+
+---
+
+### UDP
+
+- `UDP` 는 `User Datagram Protocol` 의 약자로 **OSI 7 Layer에서 4계층인 전송 계층**에 위차한다.
+- `TCP` 에 대비되는 프로토콜로 신뢰성이 낮고 완전성을 보장하지 않는다. 하지만 속도가 빠르다는 장점이 있다.
+
+### 특징
+
+- UDP는 **비연결성**이고, **신뢰성이 없으며**, **순서화되지 않은** Datagram 서비르를 제공한다.
+- 데이터 전송 단위는 `메세지` 이다. (TCP의 데이터 전송 단위는 세그먼트)
+
+### UDP가 하지 않는 것
+
+- 연결 셋업과 종료 (Connection setup/teardown)
+  - TCP의 3-way handshaking과 같은 연결이 필요없는 비연결성 프로토콜이다.
+  - 그래서 데이터그램 지향의 전송계층용 프로토콜이라고 많이 부른다.
+- 수신 완료했다는 알림 (Acknowledgement)
+  - 메세지가 제대로 도착했는지 확인하는 확인응답 작업이 없다.
+- 재전송 (Congestion Control)
+- 혼잡 제어 (In-order delivery)
+  - 흐름 제어를 위한 피드백을 제공하지 않고, 특별한 오류 검출 및 제어가 없어 UDP를 사용하는 프로그램 쪽에서 오류 제어 기능을 스스로 갖춰야 한다.
+- 순서대로 보내기
+  - 수신된 메시지의 순서를 맞추는 순서제어가 없어 TCP 헤더와 달리 순서번호 필드가 없다.
+- Fragmentation
+
+
+### UDP의 주요 기능
+- 실시간 (Real-time)
+  - UDP는 빠른 요청과 응답이 필요한 실시간 응용에 적합하다.
+  - 제약 조건이 거의 없고 TCP에 비해 매우 빠르기 떄문이다. (인터넷 전화, 스트리밍 등)
+- 간단한 트랜잭션 (Simple Transactions)
+  - TCP는 Setup과 종료, ACK를 모두 체크해야해 복잡한 transaction이 요구된다.
+  - 하지만 UDP는 위의 과정을 체크하지 않기 때문에 transaction이 간단하다. (DNS, DHCP, SNMP 등)
+- 멀티캐스트/브로드캐스트
+  - TCP는 전송측과 수신측이 서로 확인되어야 데이터를 주고받는다.
+  - Point to point 방식으로 동작하는 TCP는 멀티캐스트와 브로드캐스트 전송이 모두 불가능하다.
+  - UDP만 가능한 기능이며 전송 속도에 제한이 없다.
+
+### UDP 패킷 헤더 구조
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/udp1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- TCP 헤더에 비해 매우 단순하다.
+- **발신/수신 포트번호**가 존재하고 바이트 단위의 길이가 있다.
+- **체크섬**은 선택 항목이며 체크섬 값이 0이면 수신측은 체크섬 계산을 하지 않는다.
+- 기본적으로 UDP 헤더는 고정 크기의 8 바이트만 사용하며 헤더 처리에 많은 시간이 들지 않는다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
