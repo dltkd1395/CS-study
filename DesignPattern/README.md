@@ -1864,9 +1864,9 @@ public class Main{
 
 ### BNF
 - BNF는 컴퓨터 언어에서 언어의 문법을 수학적인 수식으로 나타낼 때 사용하는 언어 도구이다.
-- 대부분의 언어 구조가 BNF 형태로 펴햔할 수 있기 때문에 언어를 해석할 때 BNF 형태로 나타내는 경우가 많다.
+- 대부분의 언어 구조가 BNF 형태로 표현할 수 있기 때문에 언어를 해석할 때 BNF 형태로 나타내는 경우가 많다.
 - 인터프리터 패턴도 BNF 구조의 언어를 해석할 수 있도록 디자인이 되었다.
-- 
+
 ### (( not X ) and ( Y or Z )) 의 경우
 
 <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/interpreter1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
@@ -2040,10 +2040,12 @@ public class TemplateMethodPatternClient {
 2. 자식 클래스의 역할을 줄여서 핵심 로직의 관리가 용이
 3. 코드를 객체지향적으로 구성할 수 있다
 
-예제 AbstractMap<K,V>
+
 ### 단점
 1. 추상 메서드가 많아져 클래스 관리가 복잡하다
 2. 클래스간의 관계와 코드가 꼬일 수 있다.
+
+예제 AbstractMap<K,V>
 
 ```java
 public V get(Object key) {
@@ -2117,7 +2119,7 @@ public V get(Object key) {
 -  1번 버튼에 Light가 연결되어 있으면 light.on(), GarageDoor가 연결되어 있으면 garageDoor.up()...
 -  각 버튼에 기능을 직접 연결한다면 기능들이 추가될 때마다 리모컨의 코드를 고쳐야한다.
 -  하지만, 커맨드 패턴을 적용한다면 버튼마다 커맨드 객체를 저장해 두어 사용자가 버튼을 눌렀을 때 커맨드 객체를 통해서 작업을 처리하도록 만들 수 있다.
--  그러므로 리모컨에서는 자세한 내용을 전해 몰라도 된다.
+-  그러므로 리모컨에서는 자세한 내용을 전혀 몰라도 된다.
 -  리모컨은 어떤 객체에 어떤 일을 시켜야 할지 잘 알고 있는 커맨드 객체만 있으면 된다.
 
 ### 커맨드 패턴의 구조와 구성요소
@@ -2143,7 +2145,7 @@ public V get(Object key) {
   - execute() 메서드에서는 receiver에 있는 메서드를 호출하여 요청된 작업을 수행한다.
 
 ### 커맨드 패턴의 동작 순서
-1. Clent에서 커맨드 객체를 생성
+1. Client에서 커맨드 객체를 생성
 2. Invoker 객체의 setCommand() 메서드를 호출하여 커맨드 객체를 저장
 3. Client에서 Invoker를 통해 execute() 요청을 전송
 4. Invoker에서 커맨드 객체의 execute() 실행
@@ -2199,7 +2201,7 @@ public class LightOnCommand implements Command {
 
 - LightOffCommand
 ```java
-ublic class LightOffCommand implements Command {
+public class LightOffCommand implements Command {
 	
 	Light light;
 	
@@ -2352,7 +2354,8 @@ Kitchen Light is off
 - 요청을 로그에 기록
   - 커맨드에 save()와 load() 메서드를 추가한다.
   - 각 커맨드가 실행될 때 마다 디스크에 그 내역을 저장한다.
-  - 시스템이 다운되었다가 복구할 떄 그 저장 기록으로 커맨드 객체를 다시 실행할 수 있다.
+  - 시스템이 다운되었다가 복구할 때 그 저장 기록으로 커맨드 객체를 다시 실행할 수 있다.
+  
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
 
 ---
@@ -2400,7 +2403,7 @@ public class MenuItem {
 
 ```
 
-```jva
+```java
 public class PancakeHouseMenu {
 	ArrayList<MenuItem> menuItems;
 	
@@ -2670,7 +2673,7 @@ public class MenuTestDrive {
 
 ### Observer 패턴이란?
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/observer1.png" style="max-width: 25%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/observer1.png" style="max-width: 10%; display: inline-block;" data-target="animated-image.originalImage">
 
 - 객체의 상태 변화를 관찰하는 관찰자들, 즉 옵저버들의 목록을 객체에 등록하여 상태 변화가 있을 때 마다 메서드 등을 통해 `객체가 직접 목록의 각 옵저버에게 통지`하도록 하는 디자인 패턴이다. 주로 분산 이벤트 핸들링 시스템을 구현하는 데 사용된다. `발행/구독 모델`로 알려져 있기도 하다.
 - 즉, 한 객체의 상태 변화에 따라 다른 객체의 상태도 연동되도록 `일대다(one-to-many) 객체 의존 관계`를 구성하는 패턴
@@ -2736,7 +2739,7 @@ class ObserverImpl implements Observer {
 
 > 서로 상호작용을 하는 객체 사이에서는 가능하면 느슨하게 결합하는 디자인을 사용해야 한다.
 
-- 따라서 Loose Coupling 디자인을 활용하면 객체 사이의 상호 의존성을 최소화 할 수 있기 때문에 변`경사항이 생겨도 무난히 처리할 수 있는 유연한 객체지향 시스템을 구축` 할 수 있다.
+- 따라서 Loose Coupling 디자인을 활용하면 객체 사이의 상호 의존성을 최소화 할 수 있기 때문에 `변경사항이 생겨도 무난히 처리할 수 있는 유연한 객체지향 시스템을 구축` 할 수 있다.
 
 ### Observer 패턴의 예시
 
@@ -2910,7 +2913,7 @@ public class WeatherStation {
 
 ### Strategy
 
-- Strategy Pattern은 객체들의 행위를 클래스로 만들어서 캡슐화한 뒤, 행위의 변겨이나 수정이 필요할 때 동적으로 행위를 바꿀 수 있도록 하는 디자인 패턴이다.
+- Strategy Pattern은 객체들의 행위를 클래스로 만들어서 캡슐화한 뒤, 행위의 변경이나 수정이 필요할 때 동적으로 행위를 바꿀 수 있도록 하는 디자인 패턴이다.
 
 <img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/strategy1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
@@ -3079,7 +3082,7 @@ public class Client {
 ### 단점
 - Strategy 객체와 Context 객체 사이에 통신 오버헤드가 생긴다.
   - Context객체는 사용하지 않는 Strategy 정보도 갖게 된다.
-- 객체 수가 증간한다.
+- 객체 수가 증가한다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#design-pattern)
 
@@ -3360,7 +3363,7 @@ public static void main(String[] args) {
 }
 ```
 
-- 위의 방법으로 구현할 경우 모든 객체마다 로직을 위한 메서드를 정의해야하기 떄문에 `1) 새로운 기능을 추가`하기 어려울 뿐만 아니라 `2) 특정 객체에서 로직 구현을 뺴먹기도 쉽다.`
+- 위의 방법으로 구현할 경우 모든 객체마다 로직을 위한 메서드를 정의해야하기 때문에 `1) 새로운 기능을 추가`하기 어려울 뿐만 아니라 `2) 특정 객체에서 로직 구현을 뺴먹기도 쉽다.`
 - 또한 모든 객체에 대해 기능을 수행하게 하기 위해서는 위에서처럼 main()에서 모든 객체 별 각 함수를 직접 호출해야하기 때문에 3) `iterator를 통한 반복적인 처리가 불가능`하다.
 
 ### 문제2. 객체 분기의 어려움 및 코드 중복
@@ -3368,7 +3371,7 @@ public static void main(String[] args) {
 </br></br>
 
 1. 1번 예제에서 `상품 객체` 들은 유지하되, 기능을 위한 메서드는 제거한다.
-2. `주문 인터페이`스 를 정의한 뒤, 이를 구현한 `세부 기능 구현체` 를 정의한다.
+2. `주문 인터페이스` 를 정의한 뒤, 이를 구현한 `세부 기능 구현체` 를 정의한다.
 
 [상품 객체]
 
@@ -3587,7 +3590,7 @@ public static void main(String[] args) {
 
 - Visitor 패턴을 적용한 이후 달라진 부분은 다음과 같다.
   - 상품 객체 내에서 주문 기능을 구현하지 않아도 된다.
-  - 주문 기능을 클래스로 빼낸 뒤, 각 상품 객체 타입 별 별도의 메서드를 정의하고 있기 때문에 구현을 뺴먹을 위험이 적다.
+  - 주문 기능을 클래스로 빼낸 뒤, 각 상품 객체 타입 별 별도의 메서드를 정의하고 있기 때문에 구현을 빼먹을 위험이 적다.
   - 각 상품 타입 객체에서 기능 함수를 호출하여 사용하고 있기 때문에 `single dispatch` 문제가 발생하지 않는다. (더 큰 타입에서 더 작은 타입의 객체를 받고 있기 때문에)
   - 새로운 주문 기능을 추가하기가 쉽다. 객체에서는 변경 없이 오직 주문 클래스만 추가하면 된다.
 
