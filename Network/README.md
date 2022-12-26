@@ -429,7 +429,7 @@ NAT에는 Basic NAT와 NAPT 2 종류가 있고 대개 NAT라고 하면 NAPT 방�
 - TCP를 사용하는 송신자와 수신자는 데이터를 전송하기 전 먼저 서로 통신이 가능한지 의사를 묻고 한 번에 얼마나 받을 수 있는지 등의 정보를 확인한다.
 - 이는 데이터를 안전하고 빠지는 부분 없이 보내기 위한 신뢰성 있는 통신을 하기 위해서이다.
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/tcp2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/tcp2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 - TCP는 TCP Header 내의 SYN, SYN/ACK, ACK Flag를 사용해 통신을 시도한다.
 1. 송신자가 수신자에게 SYN를 보내 통신이 가능한지 확인 -> Port는 열려 있어야함
