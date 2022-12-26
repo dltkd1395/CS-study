@@ -56,7 +56,7 @@
 3. [TCP/IP](https://github.com/dltkd1395/CS-study/tree/main/Network#tcpip)
 4. [UDP](https://github.com/dltkd1395/CS-study/tree/main/Network#udp)
 5. [대칭키 & 공개키](https://github.com/dltkd1395/CS-study/tree/main/Network#대칭키-공개키)
-6. Load Balancing
+6. [Load Balancing](https://github.com/dltkd1395/CS-study/tree/main/Network#load-balancing)
 7. Blocking/Non-Blocking & Synchronous/Asynchronous I/O
 8. 웹 동작 방식
 9. DNS
