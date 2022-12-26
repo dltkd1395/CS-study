@@ -49,10 +49,10 @@
 
 ## 네트워크
 1. [OSI 7계층](https://github.com/dltkd1395/CS-study/tree/main/Network#osi-7계층)
-2. IP
-    1. IPv4
-    2. IPv6
-    3. 공인 IP, 사설 IP
+2. [IP](https://github.com/dltkd1395/CS-study/tree/main/Network#ip)
+    1. [IPv4](https://github.com/dltkd1395/CS-study/tree/main/Network#ipv4)
+    2. [IPv6](https://github.com/dltkd1395/CS-study/tree/main/Network#ipv6)
+    3. [공인 IP, 사설 IP](https://github.com/dltkd1395/CS-study/tree/main/Network#공인-ip-사설-ip)
 3. TCP/IP
 4. UDP
 5. 대칭키 & 공개키

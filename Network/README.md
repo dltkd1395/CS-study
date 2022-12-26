@@ -1,9 +1,9 @@
 # Network
 1. [OSI 7계층](https://github.com/dltkd1395/CS-study/tree/main/Network#osi-7계층)
-2. IP
-    1. IPv4
-    2. IPv6
-    3. 공인 IP, 사설 IP
+2. [IP](https://github.com/dltkd1395/CS-study/tree/main/Network#ip)
+    1. [IPv4](https://github.com/dltkd1395/CS-study/tree/main/Network#ipv4)
+    2. [IPv6](https://github.com/dltkd1395/CS-study/tree/main/Network#ipv6)
+    3. [공인 IP, 사설 IP](https://github.com/dltkd1395/CS-study/tree/main/Network#공인-ip-사설-ip)
 3. TCP/IP
 4. UDP
 5. 대칭키 & 공개키
@@ -187,3 +187,200 @@
   - HTTP, FTP, SMTP, POP3, IMAP, Telnet 등
 
 - **네트워크 소프트웨어의 UI 부분, 사용자의 입출력(I/O) 부분을 담당**
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
+
+---
+
+
+
+### IP
+
+
+### IPv4
+
+### IPv4 Protocol
+
+- IPv4 Protocol은 `비신뢰적`이고 `비연결형`인 `최선형 전송` 서비스이다. `최선형 전송`의 의미는 IPv4 패킷이 유실되거나 순서에 맞지 않게 도착할 수 있다는 뜻이다.
+- 만약 신뢰성이 중요하다면 IPv4는 TCP와 같은 신뢰성 있는 전송 계층 프로토콜과 함께 사용되어야 한다. 
+
+</br>
+
+### IPv4 Datagram
+
+- IPv4의 Datagram은 가변 길이의 패킷으로, Header와 Payload(Data)로 이뤄져 있다.
+- Header는 20에서 60바이트의 길이이며 라우팅과 같은 전송과 관련한 정보를 가지고 있다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/ip1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+[출처](https://electronicspost.com/ipv4-datagram-format/)
+
+- IPv4의 각 필드의 기능은 다음과 같다
+
+
+필드 | 기능
+|---|---|
+Version | IP 프로토콜의 버전을 의미하며, IPv4는 4의 값을 가진다.
+Header length | IPv4 Datagram은 가변의 Header를 가지며, 수신자는 전체 길이를 확인하기 위하여 필드 값에 4를 곱한다.
+Type of service | 8-bit로 구성되며, Datagram이 라우터에 의해 어떻게 처리되어야 할지 정의한다.
+datagran length (byte) | 16-bit의 필드는 IP Datagram의 전체 바이트 크기를 의미한다.
+16-bit Identifiler, Flags, 13-bit Fragmentation offset | 이 세 필드는 Datagram의 크기가 하부 네트워크가 처리할 수 있는 크기보다 클 경우에 필요한 IP Datagram의 단편화와 관련이 있다.
+Time-to-live | Datagram이 방문할 수 있는 최대 라우터의 수를 의미한다.
+Upper-layer Protocol | Datagram이 목적지에 도착하면 어느 프로토콜로 Payload가 전달되어야 할지 알려준다.
+Header checksum | IP는 Header를 검사하기 위한 checksum 필드를 사용하고 있다.
+32-bit SOurce IP address, 32-bit Destination IP address | 이 필드는 32-bit 길이의 추ㅜㄹ발지, 목적지 주소를 의미한다.
+Options (if any) | Datagram Header는 40바이트까지 옵션을 가질 수 있다. 옵션은 필수가 아니지만, 옵션을 사용할 때 이 필드가 사용된다.
+data | 이 필드는 Payload(Data)를 의미한다.
+
+### IPv4 주소
+
+- IPv4 주소는 오늘날 대중적으로 사용되는 IP 주소이다.
+
+진법 | IP Address
+|---|---|
+2진법 | 11000000 10101000 00000000 00000001
+10진법 | 192.168.0.1
+16진법 | C0 A8 00 01
+
+- IPv4 주소는 32-bit 주소 체계로 위와 같이 표기할 수 있는데, 일반적으로 10진수와 '.'를 이용하여 표한한다.
+- 10진수로 표기할 경우 8비트씩 끊어서 사용하므로 0 ~ 255 범위의 숫자를 사용하여 표현할 수 있다.
+
+### IPv4 특수 주소
+
+- IPv4에는 특수 용도로 사용되는 주소들이 있다.
+
+특수 주소 | 기능
+|---|---|
+Loopback | 127.0.0.8/8 주소는 루프백 주소이다. 이 주소를 가진 패킷은 호스트를 떠나지 않고, 호스트에 남게 된다. 테스트 용도로 많이 사용되며 그 중 127.0.0.1 주소는 테스트에 가장 많이 사용되는 주소이다.
+Limited-broadcast | 255.255.255.255/32 주소는 제한된 브로드캐스트 주소이다. 이 주소를 통해 호스트나 라우터가 네트워크 상의 모든 장치로 데이터를 보낼 수 있다. 하지만 대부분의 라우터에는 이러한 패킷을 차단하기 때문에 외부로는 보낼 수 없다.
+This-host | 0.0.0.0/32 주소는 디스-호스트 주소이다. 이 주소는 현재 네트워크를 의미하며, 자신의 주소를 모를 때 사용되는 주소이다.
+Private | 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 주소는 사설 주소로 지정되어 있다. 이러한 주소들은 공공 인터넷에 존재하지 않으며 사설로만 사용이 가능하다.
+Multicast | 224.0.0.0/4 주소는 멀티캐스트 용도로 사용되는 주소이다.
+
+### IPv6
+
+### IPv6 Protocol
+
+- IPv6 Protocol은 IPv4의 주소 고갈, IP 패킷의 형태 변경, ICMP와 같은 몇몇 보조 프로토콜의 수정을 위해 고안된 새로운 버전의 프로토콜이다.
+
+### IPv6 Datagram
+
+- IPv6 Datagram은 Header와 Payload로 구성된다.
+- 기본 Header는 40바이트를 차지하며, 확장 Header와 상위 계층 Data는 65,535바이트까지의 정보를 가질 수 있다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/ip2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+[출처](https://electronicspost.com/ipv6-datagram-format/)
+
+- IPv6의 각 필드의 역할은 다음과 같드
+
+필드 | 기능
+|---|---|
+Version | IP의 버전 전호를 의미합니다. IPv6에서는 6의 값을 가집니다.
+Traffic class | IPv4의 Type of service 필드와 유사합니다.
+Flow label | Data의 특정한 프름을 위한 특별한 처리를 제공하기 위해 사용됩니다.
+Payload length | 기본 Header를 제외한 IP Datagram의 길이를 의미합니다. IPv6의 기본 Header의 길이는 40바이트로 고정되어 있기 때문에 페이로드의 길이만 정의하면 됩니다.
+Next hdr | Next hdr 필드는 첫 확장 Header의 종류를 정의하거나 Datagram의 기본 Header를 뒤따르는 Header를 의미합니다. 이 필드는 IPv4의 Upper-layer Protocol 필드와 유사합니다.
+Hop limit | IPv4의 Time-to-live 필드와 같은 목적으로 사용됩니다.
+Source address (128bits), Destination address (128bits) | 출발지, 목적지 주소를 식별하기 위해 사용됩니다.
+Data | IPv4와 달리 IPv6의 Data(Payload) 필드는 다른 형태와 의미를 가집니다.
+
+### IPv6 Datagram Payload(Data 필드)
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/ip3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+[출처](https://www.cisco.com/en/US/technologies/tk648/tk872/technologies_white_paper0900aecd8054d37d.html)
+
+- IPv6 패킷은 기본 Header와 확장 Header로 구성된다. 기본 Header의 길이는 40바이트로 고정되어 있지만, 부가적인 기능을 제공하기 위해 기본 Header 뒤에 6개까지 확장 Header를 붙일 수 있다.
+  - Hop-by-hop
+  - Destination
+  - Source Routing
+  - Frgmentation
+  - Authentication
+  - ESP
+
+### IPv6 주소
+
+- IPv6는 IP 주소가 부족해짐에 따라 새롭게 고안된 IP 주소 체계이다. 기본의 32-bit의 주소는 128-bit로 확장되었다.
+- 오늘날 네트워크 기능을 가지는 장비(L3 Router, L4 Switch, PC, Server 등)들의 대부분은 IPv4 주소를 모두 지원하고 있으며, 천천히 IPv6 주소체계로 전환을 하고 있다.
+
+진법 | IP Address
+|---|---|
+2진법 | 1111111011110110 ... 1111111100000000
+16진법 | FEF6:BA98:7654:46E0:AFFF:F210:1124:00F1
+
+- 16진법으로 표현된 IPv6 주소는 많은 수의 0을 포함하고 있어 매우 긴 형태를 보이고 있다.
+- 이러한 경우 앞 부분의 0을 생략하고 축약된 표현을 사용할 수 있다. 0082는 82, 0FFE는 FFE, 0000은 0으로 표현할 수 있다.
+- 연속되는 영역이 0으로만 구성되어 있다면, 더많은 축약이 가능하다.
+
+> FFFF:0:0:0:EEEE:AAAA:BBBB -> FFFF::EEEE:AAAA:BBBB
+
+- 위 축약은 주소당 한 번만 가능하며, 0만을 가지는 연속된 영역이 두 개 이상 존재할 경우 한 부분만 축약이 가능하다.
+
+### 공인 IP, 사설 IP
+
+### 공인 IP
+
+- 인터넷 서비스 공급자(ISP)가 제공하는 IP 주소로 공용 IP 주소라고도 불리며 `외부에 공개되어 있는 IP`
+- 전세계에서 유일한 IP를 가진다.
+- 공인 IP 주소가 외붕 공개되어 있기 때문에 인터넷에 연결된 다른 PC로부터의 접근이 가능하다. 따라서 공인 IP주소를 사용하는 경우에는 방화벽이나 보안 프로그램을 설치할 필요가 있다.
+
+### 사설 IP
+  
+- 일반 가정이나 회사 내 등에 할당된 네트워크의 IP 주소로 로컬 IP, 가상 IP라고도 한다.
+- `IPv4의 주소 부족`으로 인해 서브넷팅된 IP이기 때문에 라우터에 의해 로컬 네트워크 상의 PC나 장치에 할당된다.
+</br>
+
+- 전체 IP 대역 중에서 다음의 대역은 사설 IP 대역으로 설정되어 있기 때문에 사용자가 임의로 부여하고 사용할 수 있으며 인터넷 상에서 서로 연결되지 않도록 되어 있다.
+
+구분 | 범위
+|---|---|
+A 클래스 | 10.0.0.1 ~ 10.255.255.255
+B 클래스 | 172.16.0.1 ~ 172.31.255.255
+C 클래스 | 192.168.0.1 ~ 192.168.255.255
+
+- 사설 IP로 회사나 가정 내의 IP 주소를 부여하고 공유기 등에 고정 IP를 부여한 다음에 인터넷에 접속하는 방식이 널리 퍼지게 되었고, 대부분의 장비가 현재는 사설 IP를 부여하고 공유기를 통해 인터넷에 접속하게 된다.
+  - 공유기는 공인 IP를 가진다
+  - 컴퓨터나 노트북은 사설 IP를 가지고 공유기를 통해 인터넷에 접근할 수 있다.
+
+### 사설 IP와 공인 IP의 차이
+
+| 공인 IP | 사설 IP
+|---|---|---|
+할당 주체 | ISP(인터넷 서비스 공급자) | 라우터(공유기)
+할당 대상 | 개인 또는 회사의 서버(라우터) | 개인 또는 회사의 기기
+고유성 | 인터넷 상에서 유일한 주소 | 하나의 네트워크 안에서 유일
+공개 여부 | 내/외부 접근 가능 | 외부 접근 불가능
+
+### NAT 
+- Network Address Translation의 약자로 OSI 3계층인 네트워크 계층에서 공인 IP와 사설 IP로 변환하는 역을 한다.
+- IPv4의 주소 부족으로 인해 공인 `IP 주소를 절약`하고 외부로부터 침입을 차단하기 위해 사용한다.
+
+NAT에는 Basic NAT와 NAPT 2 종류가 있고 대개 NAT라고 하면 NAPT 방식을 말한다.
+
+### NAPT
+
+- Network Address Port Translation의 약자로 사설 IP 주소를 가지는 여러 대의 단말이 하나의 공인 IP 주소를 통해 인터넷과 연결되는 방식
+- 공인 IP 주소 절약을 목적으로 사용되며 1:N Translation 규칙을 사용한다. (1 = 공인 IP, N = 사설 IP)
+- NAPT 방식을 이용하면 간략하게 아래와 같이 인터넷과 연결된다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/ip4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+[출처](https://netmanias.com/ko/?m=view&id=blog&no=5826)
+
+(사설 IP -> 공인 IP)
+1. 사설 IP 주소를 가진 단말이 인터넷으로 전송하고자 하면 사설 IP와 Port에 대한 공인 IP와 Port를 할당하고 NAT Binding Table에 해당 정보를 생성한다.
+2. NAT Binding Table을 참조해서 사설 IP 주소를 공인 IP 주소로 변환하고 인터넷으로 전송한다.
+
+(공인 IP -> 사설 IP)
+3. NAT Binding Table을 참조해서 공인 IP 주소를 사설 IP 주소로 변환해서 단말로 전송한다.
+
+### 고정 IP
+- 컴퓨터에 고정적으로 부여된 IP
+- 한번 부여되면 반납하기 전까지 다른 장비에 부여할 수 없는 IP 주소
+- 인터넷에서 서버를 운영하고자 할 때는 공인 IP를 고정 IP로 부여해야 한다. 공인 IP를 부여받지 못하면 다른 사람이 내 서버에 접속할 수 없고, 고정 IP를 부여하지 않으면  내 서버가 아닌 다른 살마의 서버로 접속할 수 있다.
+
+### 유동 IP
+- 장비에 고정적으로 IP를 부여하지 않고 컴퓨터를 사용할 때 남아 있는 IP 중에서 돌아가면서 부여하는 IP
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
