@@ -46,3 +46,23 @@
     - [Strategy](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#strategy)
     - [State](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#state)
     - [Visitor](https://github.com/dltkd1395/CS-study/tree/main/DesignPattern#visitor)
+
+## 네트워크
+1. [OSI 7계층](https://github.com/dltkd1395/CS-study/tree/main/Network#osi-7계층)
+2. IP
+    1. IPv4
+    2. IPv6
+    3. 공인 IP, 사설 IP
+3. TCP/IP
+4. UDP
+5. 대칭키 & 공개키
+6. Load Balancing
+7. Blocking/Non-Blocking & Synchronous/Asynchronous I/O
+8. 웹 동작 방식
+9. DNS
+10. HTTP 프로토콜
+11. HTTP와 HTTPS
+12. HTTP Method
+13. HTTP 상태 코드
+14. 쿠키, 세션
+15. JWT, OAuth
