@@ -4,7 +4,7 @@
     1. [IPv4](https://github.com/dltkd1395/CS-study/tree/main/Network#ipv4)
     2. [IPv6](https://github.com/dltkd1395/CS-study/tree/main/Network#ipv6)
     3. [공인 IP, 사설 IP](https://github.com/dltkd1395/CS-study/tree/main/Network#공인-ip-사설-ip)
-3. TCP/IP
+3. [TCP/IP](https://github.com/dltkd1395/CS-study/tree/main/Network#tcpip)
 4. UDP
 5. 대칭키 & 공개키
 6. Load Balancing
@@ -382,5 +382,96 @@ NAT에는 Basic NAT와 NAPT 2 종류가 있고 대개 NAT라고 하면 NAPT 방�
 
 ### 유동 IP
 - 장비에 고정적으로 IP를 부여하지 않고 컴퓨터를 사용할 때 남아 있는 IP 중에서 돌아가면서 부여하는 IP
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
+
+### TCP/IP
+
+- `TCP/IP` 는 하나의 트로토콜이 아닌 TCP 프로토콜과 IP 프로토콜을 합쳐서 부르는 말이다.
+- **패킷 통신 방식의 인터넷 프로토콜인 IP와 전송조절 프토토콜인 TCP**로 이루어져 있다.
+- `IP`는 패킷 전달 여부는 보증하지 않고 논리적인 주소만을 제공하며, 패킷을 보낸 순서와 받는 순서가 보장되지 않는다.
+- `TCP`는 IP 위에서 동작하는 프로토콜로 데이터의 전달을 보장하고 데이터를 보낸 순서와 받는 순서를 보장해준다.
+- HTTP, FTP, SMTP 등의 프로토콜은 TCP를 기반으로 하고 있으며 이 프로토콜들은 IP 위에서 동작하기 때문에 묶어서 TCP/IP로 부른다.
+
+</br>
+
+- 또한 TCP/IP를 사용한다는 것은 IP 주소 체계를 따르면서 TCP의 특성을 활용해 송신자와 수신자의 논리적 연결을 생성하고 신뢰성을 유지할 수 있도록 하겠다는 의미이다.
+- 즉 TCP/IP를 말한다는 것은 송신자가 수신자에게 IP 주소를 사용해 데이터를 전달하고 그 데이터가 제대로 갔는지, 너무 빠르지는 않는지, 제대로 받았다고 연락은 오는지에 대한 이야기를 하고 있는 것이다.
+
+</br>
+
+- 인터넷에서 무언가를 다운로드할 때 중간에 끊기거나 빠지는 부분이 없이 완벽하게 받을 수 있는 이유도 TCP의 이러한 특성 때문이다.
+- 그렇기 때문에 HTTP, HTTPS, FTP, SMTP 등과 같이 데이터를 안정적으로 모두 보내는 것을 중요시하는 프로토콜들의 기반이 된다.
+
+### TCP (Transmission Control Protocol)
+
+- `TCP 프로토콜` 은 **OSI 7 Layer에서 4계층인 전송 계층**에 위치한다.
+- TCP는 네트워크 정보 전달을 통제하는 프로토콜이자 인터넷을 이루는 핵심 프로토콜 중 하나이다.
+- 근거리 통신망이나 인트라넷, 인터넷에 연결된 컴퓨터에서 실행되는 프로그램 간에 데이터 전송을 안정적으로, 순서대로, 에러 없이 교환할 수 있게 해준다.
+- 웹 브라우저들이 www를 통해 서버에 연결할 때 사용되며, 이메일 전송이나 파일 전송에도 사용된다.
+
+</br>
+
+- IP가 패킷들의 관계를 이해하지 못하고 그저 목적지를 제대로 찾아가는 것에 중점을 둔다면 `TCP`는 통신하고자 하는 양쪽 단말이 통신할 준비가 되었는지, 데이터가 제대로 전송되었는지, 데이터가 가는 도중 변질되지는 않았는지, 수신자가 얼마나 받았고 빠진 부분은 없는지 등을 점검한다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/tcp1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 이런 정보들은 `TCP Header`에 담겨 있으며 Source Port, Destination Port, Sequence Number, Window Size, Checksum과 같은 `신뢰성 보장`과 `흐름 제어`, `혼잡 제어`에 관여할 수 있는 요소들도 포함되어 있다.
+- 또한 IP Header와 TCP Header를 제외한 TCP가 실을 수 있는 데이터의 크기를 세그먼트(Segment)라고 부른다.
+
+</br>
+
+- TCP는 IP의 정보뿐만 아니라 **Port를 이용하여 연결**한다.
+- 힌쪽 단말에 도착한 데이터가 어느 입구(Port)로 들어가야 하는지 알아야 연결을 시도할 수 있기 때문이다.
+- 위의 TCP Header를 보면 발신지 포트주소 (Source Port)와 목적지 포트주소 (Destination Port)를 확인 할 수 있다. (예시로, 양쪽 단말에서 HTTP로 이루어진 문서를 주고받고자 할 경우 데이터 통신을 하려면 단말의 Port가 80이어야만 가능합니다.)
+
+### 3-way handshake
+- TCP를 사용하는 송신자와 수신자는 데이터를 전송하기 전 먼저 서로 통신이 가능한지 의사를 묻고 한 번에 얼마나 받을 수 있는지 등의 정보를 확인한다.
+- 이는 데이터를 안전하고 빠지는 부분 없이 보내기 위한 신뢰성 있는 통신을 하기 위해서이다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/tcp2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.
+
+- TCP는 TCP Header 내의 SYN, SYN/ACK, ACK Flag를 사용해 통신을 시도한다.
+1. 송신자가 수신자에게 SYN를 보내 통신이 가능한지 확인 -> Port는 열려 있어야함
+2. 수신자가 송신자로부터 SYN를 받고 SYN/ACK를 송신자에게 보내 통신 준비가 되었다고 함.
+3. 송신자가 수신자의 SYN/ACK를 받고 ACK를 날려 전송을 시작함을 알림
+위 과정을 3-way handshake 라고 부른다.
+
+</br>
+
+**TCP로 이루어진 모든 통신은 반드시 3-way handshake를 통해 시작한다.**
+
+- 수신자가 받을 생각이 있는지 준비가 되어있는지 송신자가 보낼 준비가 되어있는지를 미리 확인한 후 통신을 시작해 데이터를 안전하게 보내는 것이다.
+- 그리고 데이터를 받았을 때 `ACK`를 송신자에게 보내 데이터가 온전히 도착했음을 알린다.
+- 송신자는 `ACK`를 받으면 수신자에게 데이터가 잘 보내졌음을 확인하고 다음 데이터를 전달할 준비를 한다.
+
+### 특징
+**1. 흐름제어**
+
+- `송신자`는 자신이 한 번에 얼마를 보낼 수 있는지, 수신자는 자신이 데이터를 어디까지 받았는지 계속 확인하고 TCP Header 내의 Window size를 이용해 한 번에 받고, 보낼 수 있는 데이터의 양을 정한다. (여기서 window 는 일정량의 데이터를 말합니다.)
+- `수신자`가 데이터를 받을 Window size를 정하고 (3-way handshake 때 정한다) 자신의 상황에 따라 Window size를 조절한다.
+- 그리고 자신이 지금까지 받은 데이터의 양을 확인해 송신자에게 보내는데 이를 `Acknowledment Number` 라고 한다.
+- 만약 수신자가 130번째 데이터를 받았으면, `Acknowledment Number` 에 1을 더해서 131을 보낸다.
+- 이것은 현재 130번까지 받았으니 131번부터 보내면 된다는 의미이다.
+- 그리고 이러한 순서 번호를 표기한 것이 `Sequence Number` 이다.
+
+**2. 혼잡제어**
+
+- **데이터가 지나가는 네트워크망의 혼잡을 제어하는 것이다.**
+- `Slow Start` 는 연결 초기에 송신자와 수신자가 데이터를 주고받을 준비가 되어있더라도 중간 경로인 네트워크가 혼잡하다면 데이터가 안전하게 전송할지 못할 것에 대비하는 것이다.
+- `송신자`는 연결 초기에 데이터 송출량을 낮게 잡고 보내면서 수신자의 수신을 확인해가며 데이터 송출량을 조금씩 늘린다.
+- 그러다보면 현재 네트워크에서 가장 적합한 데이터 송출량을 확인할 수 있게 된다.
+- 이것이 `Slow Start`이다.
+
+### IP (Internet Protocol)
+- `IP 프로토콜` 은 OSI 7 Layer 중 3 계층인 네트워크 계층에 해당한다.
+- IP는 TCP와는 달리 **데이터의 재조합이나 손실여부 확인이 불가능**하며, 단지 데이터를 전달하는 역할만을 담당한다.
+
+</br>
+
+- 컴퓨터와 컴퓨터 간에 데이터를 전송하기 위해서는 각 컴퓨터의 주소가 필요하다.
+- **IP는 4바이트로 이루어진 컴퓨터 주소이며 3개의 마침표로 나누어진 숫자**로 표시된다.
+(예시 `127.0.0.1`)</br>
+- IP 주소는 하드웨어 고유의 식별 번호인 MAC 주소와 다르게 임시적으로 다른 주체(대부분 통신사)에게 받는 주소이므로 바뀔 수 있다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
