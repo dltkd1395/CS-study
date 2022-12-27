@@ -59,7 +59,7 @@
 6. [Load Balancing](https://github.com/dltkd1395/CS-study/tree/main/Network#load-balancing)
 7. [Blocking/Non-Blocking & Synchronous/Asynchronous I/O](https://github.com/dltkd1395/CS-study/tree/main/Network#blocking-vs-non-blocking-io-%EC%99%80-synchronous-vs-asynchronous-io)
 8. [웹 동작 방식](https://github.com/dltkd1395/CS-study/tree/main/Network#웹-동작-방식)
-9. DNS
+9. [DNS](https://github.com/dltkd1395/CS-study/tree/main/Network#dns)
 10. HTTP 프로토콜
 11. HTTP와 HTTPS
 12. HTTP Method
