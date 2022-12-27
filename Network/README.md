@@ -9,8 +9,7 @@
 5. [대칭키 & 공개키](https://github.com/dltkd1395/CS-study/tree/main/Network#대칭키-공개키)
 6. [Load Balancing](https://github.com/dltkd1395/CS-study/tree/main/Network#load-balancing)
 7. [Blocking/Non-Blocking & Synchronous/Asynchronous I/O](https://github.com/dltkd1395/CS-study/tree/main/Network#blocking-vs-non-blocking-io-%EC%99%80-synchronous-vs-asynchronous-io)
-8. 웹 동작 방식
-8. 웹 동작 방식
+8. [웹 동작 방식](https://github.com/dltkd1395/CS-study/tree/main/Network#웹-동작-방식)
 9. DNS
 10. HTTP 프로토콜
 11. HTTP와 HTTPS
@@ -827,5 +826,26 @@ RSA는 소인수분해 연산을 이용한다.
 > Non-Blocking : 유저 프로세스가 입출력 작업을 위한 함수를 호출하면, 커널은 작업 종료 여부와 무관하게 함수를 바로 반환한다. 따라서 현재 프로세스가 봉쇄되지 않아 여러 작업을 수행할 수 있다. </br>
 > Synchronous : 작업 요청을 보낸 유저 프로세스가 작업 완료 여부를 확인한다. </br>
 > Asynchronous : 작업 요청을 받은 커널이 작업 완료 여부를 통지한다.
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
+
+--
+
+### 웹 동작 방식
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/web1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+
+1, 2. 사용자가 웹 브라우저에 웹 페이지의 URL 주소를 입력한다. </br>
+3. 웹 브라이줘는 URL 주소 중에서 도메인 네임(domain name) 부분을 DNS 서버에서 검색한다.
+4. DNS 서버에서 해당 도메인 네임에 해당하는 IP 주소를 찾고 사용자가 입력한 URL 정보와 함께 전달한다.
+5. IP 주소와 URL 정보는 HTTP 프로토콜을 사용하여 HTTP 요청 메시지(HTTP Request)를 생성한다.
+6. 이렇게 생성된 HTTP 요청 메시지는 TCP 프로토콜을 사용하여 인터넷을 거쳐 해당 IP 주소의 컴퓨터로 전송된다.
+7. 도착한 HTTP 요청 메시지는 HTTP 프로토콜을 사용하여 웹 페이지 URL 정보로 변환된다.
+8. 웹 서버는 도착한 웹 페이지 URL 정보에 해당하는 데이터를 검색한다.
+9. 검색된 웹 페이지 데이터는 또다시 HTTP 프로토콜을 사용하여 HTTP 응답 메시지(HTTP Response)를 생성한다.
+10. 이렇게 생성된 HTTP 응답 메시지는 TCP 프로토콜을 사용하여 인터넷을 거쳐 원래 컴퓨터로 전송된다.
+11. 도착한 HTTP 웅답 메시지는 HTTP 프로토콜을 사용하여 웹 페이지 데이터로 변환된다.
+12. 웹 브라우저는 변환된 웹 페이지 데이터를 출력한다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
