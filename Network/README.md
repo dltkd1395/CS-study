@@ -11,7 +11,7 @@
 7. [Blocking/Non-Blocking & Synchronous/Asynchronous I/O](https://github.com/dltkd1395/CS-study/tree/main/Network#blocking-vs-non-blocking-io-%EC%99%80-synchronous-vs-asynchronous-io)
 8. [웹 동작 방식](https://github.com/dltkd1395/CS-study/tree/main/Network#웹-동작-방식)
 9. [DNS](https://github.com/dltkd1395/CS-study/tree/main/Network#dns)
-10. HTTP 프로토콜
+10. [HTTP 프로토콜](https://github.com/dltkd1395/CS-study/tree/main/Network#http-프로토콜)
 11. HTTP와 HTTPS
 12. HTTP Method
 13. HTTP 상태 코드
@@ -911,5 +911,239 @@ RSA는 소인수분해 연산을 이용한다.
 <br>
 
 - 실제 DNS 서버는 반복과 재귀적인 방식을 함께 사용하여 Local DNS 서버에 재귀, Root와 TLD 서버에는 반복, Authoritative 서버에는 재귀/반복적 query를 사용한다.
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
+
+---
+
+### HTTP 프로토콜
+
+### HTTP란?
+
+- HTTP(Hypertext Transfer Protocol)는 인터넷 상에서 데이터를 주고 받기 위한 `서버/클라이언트 모델`을 따르는 프로토콜이다.
+- 애플리케이션(응용) 레벨의 프로토콜로 `TCP/IP`위에서 작동한다.
+- HTTP로 보낼 수 있는 데이터는 HTML문서, 이미지, 동영상, 오디오, 텍스트 문서 등 여러 종류가 있다.
+- "하이퍼텍스트 기반으로(Hypertext) 데이터를 전송하겠다(Transfer)" = "**링크 기반**으로 데이터에 접속하겠다"는 의미이다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/http1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+### HTTP 작동방식
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/http2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- HTTP는 기본적으로 요청/응답 **(request/response)** 구조로 되어 있다.
+- 클라이언트가 **HTTP Request**를 서버에 보내면 서버는 **HTTP Response**를 보내는 구조.
+- 클라이언트와 서버의 모든 통신이 **요청과 응답**으로 이루어진다.
+
+
+### HTTP의 특징
+
+**비연결성 (Connectionless)**
+- 클라이언트에서 서버에 요청을 하고 서버가 요청을 받아 응답하게 되면 **연결을 끊어버리는 특징**
+  - 지속적인 연결로 인한 서버 부담이 줄어드는 장점이 있으나 클라이언트의 이전 상태를 알 수가 없게 된다.
+  - 이전 상태 정보를 알 수 없게 되면 로그인을 성공하더라도 로그 정보를 유지할 수 없게 된다.
+
+- HTTP 1.1 부턴 **지속적 연결 상태가 기본**이며 이를 해제하기 위해선 명시적으로 요청 헤더를 수정해야 한다.
+
+(참고 Keep-Alive)
+- HTTP 프로토콜의 Keep-Alive는 Http의 Header의 일종으로, **HTTP/1.0에서 지원하지 않던 지속 커넥션을 가능하게 하기 위해서**사용되었다.
+
+[HTTP 요청시]
+
+```
+Connection: Keep-Alive
+```
+
+[HTTP 응답시]
+
+```
+Connection: Keep-Alive
+Keep-Alive: max=5, timeout=120 
+```
+
+Keep-Alive 헤더를 추가적으로 보낼 수 있다.
+- Keep-Alive의 max 파라미터는 커넥션이 몇 개의 HTTP 트랜잭션을 처리할 떄까지 유자될 것인지를 의미한다.
+- timeout 파라미터는 커넥션이 얼마동안 유지될 것인가를 나타내고, 위의 예시에서는 2분동안 커넥션을 유지하라는 내용이다.
+
+
+**무상태성 (Stateless)**
+- 비연결성 (Connectionless)에서 파생되는 특징으로 **각각의 요청이 독립적으로 여겨지게 되는 특징**
+  - 서버는 클라이언트의 상태(State)를 유지하지 않으므로 **Cookie, Session** 등을 이용하여 클라이언트 인증, 인식을 한다.
+
+> Cookie(쿠키) : 서버에 저장하지 않고 클라이언트에 저장되는 방식으로, 개별 클라이언트 상태정보를 HTTP 헤더에 담아 전달하는 데이터 </br>
+> Session(세션) : 쿠키와 반대로 클라이언트에 저장되는 것이 아니라 서버에 데이터를 저장하는 방법
+
+### URI
+
+- URI는 HTTP와는 독ㄱ립된 다른 체계다.
+- HTTP는 **전송 프로토콜**이고, URI는 **자원의 위치를 알려주기 위한 프로토콜**이다.
+- Uniform Resource Identifiers(URL)의 줄임으로, World Wide Web(wwww)상에서 접근하고자 하는 자원의 위치를 나타내기 위해서 사용한다.
+- 자원은 HTML 문서, 이미지, 동영상, 오디오, 텍스트 문서등 모든 것이 될 수 있다.
+
+</br>
+
+- 웹페이지의 위치를 나타내기 위해서 사요하는 https://www.naver.com/index.html 등이 URI의 예다.
+
+```
+https : 자원에 접근하기 위해서 https 프로토콜을 사용한다.
+
+www.naver.com : 자원의 인터넷 상에서의 위치는 www.naver.com 이다. 
+                도메인은 ip 주소로 변환되므로, ip 주소로 서버의 위치를 찾을 수 있다.
+
+index.html : 요청할 자원의 이름이다.
+```
+
+- 이렇게 **"프로토콜, "위치", "자원명"**으로 어디에 있던지 자원에 접근할 수 있다.
+
+### HTTP Request(요청) 구조
+
+- HTTP Request 메세지는 크게 3부분으로 구성된다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/http3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- Start Line (Status Line)
+- Headers
+- Body
+</br> </br>
+
+**Start Line (Status Line)**
+
+- 말그대로 HTTP request의 첫라인으로, start line 또한 3부분으로 구성되어 있다.
+
+```http
+GET /search HTTP/1.1
+```
+
+1. HTTP Method
+    - 해당 request가 의도한 action을 정의하는 부분
+    - HTTP Methods에는 GET, POST, PUT, DELETE, OPTIONS 등이 있다.
+    - 주로 GET과 POST가 쓰인다.
+
+2. Request target
+    - 해당 request가 전송되는 **목표 URL**
+
+3. HTTP Version
+    - 말 그대로 사용되는 HTTP 버전으로, 1.0, 1.1, 2.0 등이 있다.
+
+
+**Headers**
+
+- 해당 request에 대한 **추가 정보**를 담고 있는 부분
+  - 예를 들어, request 메세지 body의 총 길이 (Content-Length) 등
+- Key: **Value** 값으로 되어 있다. (: 이 사용됨)
+  - `HOST: google.com` => Key = HOST, Value = google.com
+
+```http
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Type: application/json
+Content-Length: 257
+Host: google.com
+User-Agent: HTTPie/0.9.3
+```
+
+- Host : 요청이 전송되는 target의 host url (예를 들어, google.com)
+- User-Agent : 요청을 보내는 클라이언트의 대한 정보 (예를 들어, 웹브라우저에 대한 정보)
+- Accept : 해당 요청이 받을 수 있는 응답(response) 타입
+- Connection : 해당 요청이 끝난 후에 클라이언트와 서버가 계속해서 네트워크 컨넥션을 유지할 것인지 아니면 끊을 것인지에 대해 지시하는 부분
+- Content-Type : 해당 요청이 보내느 메세지 body의 타입 (예를 들어, JSON을 보내면 application/json)
+- Content-Length : 메세지 body의 길이
+
+**Body**
+
+- 해당 requst의 실제 메세지/내용으로, Body가 없는 request도 많다.
+- 예를 들어, GET request들은 대부분 body가 없는 경우가 많음
+
+```http
+POST /payment-sync HTTP/1.1
+Accept: application/json
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 83
+Content-Type: application/json
+Host: intropython.com
+User-Agent: HTTPie/0.9.3
+
+{
+    "imp_uid": "imp_1234567890",
+    "merchant_uid": "order_id_8237352",
+    "status": "paid"
+}
+```
+
+### HTTP Response(응답) 구조
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/Network/image/http4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- Start line (Status line)
+- Headers
+- Body
+
+**Start Line (Status Line)**
+- Response의 상태를 간략하게 나타내주는 부분으로, 3부분으로 구성되어 있다.
+
+```http
+HTTP/1.1 404 Not Found
+```
+1. HTTP 버전
+2. Status code : 응답 상태를 나타내는 코드 (예를 들어, 200)
+3. Status text : 응답 상태를 간략하게 설명해주는 부분 (예를 들어, "Not Found")
+
+
+**Headers**
+- Request의 headers와 동일하다.
+- 다만 response에서만 사용되는 header 값들이 있다.
+  - 예를 들어, User-Agent 대신에 Server 헤더가 사용된다.
+
+**Body**
+- Request의 body와 일반적으로 동일하다.
+- Request와 마찬가지로 모든 request가 body가 있지는 않다. 데이터를 전송할 필요가 없을 경우 body가 비어있게 된다.
+
+```http
+HTTP/1.1 200 OK
+Date: Sat, 17 Oct 2020 07:32:39 GMT
+Content-Type: application/json
+Content-Length: 332
+Connection: close
+Server: gunicorn/19.9.0
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+
+{
+  "args": {}, 
+  "data": "Hello", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Content-Length": "5", 
+    "Content-Type": "text/plain", 
+    "Host": "httpbin.org", 
+    "X-Amzn-Trace-Id": "Root=1-5f8a9e17-1755758a691e5b0051977312"
+  }, 
+  "json": null, 
+  "origin": "121.131.70.240", 
+  "url": "https://httpbin.org/post"
+}
+```
+
+### HTML 버전
+
+- 현재는 주로 HTML/1.1, HTML/2.0을 사용한다.
+
+1. HTTP/1.0
+ - 처음으로 널리 사용하기 시작한 버전이다.
+2. HTTP/1.0+
+ - keep alive 커넥션, 프락시 연결 지원 등의 기능이 추가 되었다.
+3. HTTP/1.1
+ - 1.0에서는 연결하고 끊고를 반복하면 서버나 클라이언트 모두에 부담이 된다. 그래서 1.1은 pipeline (파이프라인) 기능을 추가하여 매전 연결을 맺고 끊고 하는 과정을 줄여서 속도를 높였다.
+ - PUT, DELETE 등의 새로운 Method가 추가 되었다.
+4. SPDY
+-  구글이 만든 프로토콜로, HTTP의 속도를 개선시키기 위해 만들었다.
+-  대표적인 기능으로 헤더를 압축하는 기능과 하나의 TCP커넥션에 여러 요청을 동시에 보내는 기능, 클라이언트가 요청을 보내지 않아도 서버가 리소스를 푸시하는 기능 등을 갖추고 있다.
+5. HTTP/2.0
+- 2012년 구글이 만든 SPDY 프로토콜을 기반으로 만들어진 프로토콜이다.
+- 1.1은 커넥션 하나에서 여러개의 파일을 전송할 수 있는 1개의 파이프라인을 연결하는데 2.0은 연결이 되면 여러개의 파이프라인을 꽂는다고 생각하면 된다.
+- 이걸 **stream(스트림)**이라고 하는데 1번 파이프라인으로 전송되던 파일이 늦어지면 2번, 3번 또는 다른 파이프라인으로 보내기 때문에 **늦어지는 현상이 1.1에 비해서 짧다는 장점**이 있다.
 
 [맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)

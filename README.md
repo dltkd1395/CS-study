@@ -60,7 +60,7 @@
 7. [Blocking/Non-Blocking & Synchronous/Asynchronous I/O](https://github.com/dltkd1395/CS-study/tree/main/Network#blocking-vs-non-blocking-io-%EC%99%80-synchronous-vs-asynchronous-io)
 8. [웹 동작 방식](https://github.com/dltkd1395/CS-study/tree/main/Network#웹-동작-방식)
 9. [DNS](https://github.com/dltkd1395/CS-study/tree/main/Network#dns)
-10. HTTP 프로토콜
+10. [HTTP 프로토콜](https://github.com/dltkd1395/CS-study/tree/main/Network#http-프로토콜)
 11. HTTP와 HTTPS
 12. HTTP Method
 13. HTTP 상태 코드
