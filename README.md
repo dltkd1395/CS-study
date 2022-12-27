@@ -65,4 +65,4 @@
 12. [HTTP Method](https://github.com/dltkd1395/CS-study/tree/main/Network#http-method)
 13. [HTTP 상태 코드](https://github.com/dltkd1395/CS-study/tree/main/Network#http-상태코드)
 14. [쿠키, 세션](https://github.com/dltkd1395/CS-study/tree/main/Network#쿠키-세션)
-15. [JWT, OAuth](https://github.com/dltkd1395/CS-study/tree/main/Network#jmt-oauth)
+15. [JWT, OAuth](https://github.com/dltkd1395/CS-study/tree/main/Network#jwt-oauth)

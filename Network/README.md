@@ -16,7 +16,7 @@
 12. [HTTP Method](https://github.com/dltkd1395/CS-study/tree/main/Network#http-method)
 13. [HTTP 상태 코드](https://github.com/dltkd1395/CS-study/tree/main/Network#http-상태코드)
 14. [쿠키, 세션](https://github.com/dltkd1395/CS-study/tree/main/Network#쿠키-세션)
-15. [JWT, OAuth](https://github.com/dltkd1395/CS-study/tree/main/Network#jmt-oauth)
+15. [JWT, OAuth](https://github.com/dltkd1395/CS-study/tree/main/Network#jwt-oauth)
 
 ## OSI 7계층
 
@@ -1710,3 +1710,5 @@ void removeSession(HttpServletRequest req) {
 - 즉 OAuth framework로 들어가서 해당 정보가 저장되어 있는 주소를 확인할 수 있는 포인터이다.
 - 반대로 **JWT**는 포인터 또는 모호한 토큰이 아니다.
 - JWT가 스스로 유효성 검사를 한다고 하는 것들은 개발자가 토큰의 내부 속성 정보를 활용해 유효성 검사를 할 수 있음을 얘기하는 것이다. 이것은 취약점으로 작용할 수도 있다.
+
+[맨위로](https://github.com/dltkd1395/CS-study/tree/main/Network#network)
