@@ -63,6 +63,6 @@
 10. [HTTP 프로토콜](https://github.com/dltkd1395/CS-study/tree/main/Network#http-프로토콜)
 11. [HTTP와 HTTPS](https://github.com/dltkd1395/CS-study/tree/main/Network#http와-https)
 12. [HTTP Method](https://github.com/dltkd1395/CS-study/tree/main/Network#http-method)
-13. HTTP 상태 코드
+13. [HTTP 상태 코드](https://github.com/dltkd1395/CS-study/tree/main/Network#http-상태코드)
 14. 쿠키, 세션
 15. JWT, OAuth
