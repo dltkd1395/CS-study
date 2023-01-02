@@ -5,6 +5,7 @@
 ---
 
 ## OOP
+- [객체지향 사실과 오해](https://github.com/dltkd1395/CS-study/tree/main/OOP#객체지향-사실과-오해)
 - [단일 책임 원칙(SRP)](https://github.com/dltkd1395/CS-study/tree/main/OOP#srp)
 - [개방 폐쇄 원칙(OCP)](https://github.com/dltkd1395/CS-study/tree/main/OOP#ocp)
 - [리스코프 치환 원칙(LSP)](https://github.com/dltkd1395/CS-study/tree/main/OOP#lsp)

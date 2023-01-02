@@ -1,4 +1,143 @@
 # OOP
+
+## 객체지향 사실과 오해
+
+> 현실셰게에서 식별가능한 개체 또는 사물은 모두 `상태`와 `행동`을 가진 객체로 볼 수 있고, 이를 소프트웨어 세계에 모방해놓은 것이 `객체지향`이다.
+
+- 현실 세계의 객체와 소프트웨어 세계의 객체 사이에는 차이점이 있다.
+- 예를 들어, **커피**라는 객체가 있다고 하자. 현실 세계의 커피는 스스로 양을 줄이거나 늘릴 수오 없는 수동적인 존재이다. 반면, 객체지향 세계에서 커피는 스스로 자신의 상태를 관리 할 수 있는 자율적인 존재가 된다. 또 필요에 따라 추가적인 능력도 보유할 수 있다.
+- 이처럼 소프트웨어 객체는 일반적으로 현실 객체가 가지지 못한 더많은 특징과 능력을 보유한 객체이다. 객체지향 설계 목적은 현실 세계를 모방하는 것이 아닌, **새로운 세계를 창조하는 것**이다.
+
+### 객체지향은 `클래스`가 아니라 `객체`를 지향하는 것이다.
+- 객체지향 설계에서 중요한 것은 어떤 클래스가 필요한가가 아니라 어떤 객체들이 어떤 메시지를 주고 받으며 협력하는 가이다. 클래스는 단지 추상적으로 구현할 수 있게 도와주는 도구에 불구하다. 따라서 코드를 담은 클래스의 관점이 아닌 **메시지를 주고받는 객체의 관점**으로 바라보아야 한다
+
+### 객체의 행동이 상태를 결정한다.
+- 만약 학생을 객체로 설계한다고 생각해보자. 객체에 필요한 상태인 학번, 이름, 나이, 전공 등을 정의 하고, 관련된 행동을 무엇인지 생각하고 추가해 나갈 것이다.
+- 이처럼 상태를 먼저 결정하고, 행동을 후에 결정하는 방식은 협력에 적합한 객체를 만들지 못할 가능성이 높다.
+- 객체의 존재 이유는 협력하기 위함이다. 이를 달성하기 위해 서로 메시지를 주고 받는다. 따라서 **메시지를 처리할 행동이 먼저 정의하고, 그다음 행동을 수행하는 데 필요한 상태를 정의해야한다.**
+
+### 메시지가 수신자(객체)의 책임을 결정한다.
+- 객체의 협력에 있어 가장 중요한 것이 `메시지`이다. 객체는 자신의 책임을 완수하기 위해서 다른 객체에 도움을 요청한다. 이때 수신 받은 객체는 요청받은 메시지를 완수해야할 책임을 가지게 된다. 만약 수신 받은 객체 또한 어떠한 요청을 해야한다면 또 다른 객체에 메시지를 보내 요청을 할 것이다. 요청 받은 또 다른 객체도 이것을 처리하기 위해 책임을 가지게 될 것이다. 이런 식으로 계속 메시지를 주고 받으면 어느새 각 객체들의 책임이 결정될 것이다.
+- 따라서 객체가 메시지를 선택하는 것이 아니라 **메시지가 객체를 선택**한다는 것이다!!
+
+### 메시지는 무엇을(WHAT), 메서드는 어떻게(HOW)
+- 메시지는 `무엇을(WHAT)` 실행할 것인지를 정의한다.
+- 메소드는 그 메시지를 `어떻게(HOW)` 실행할 것인지 정의하고 처리 방법은 수신자가 결정할 수 있다.
+- 따라서 동일한 메시지라도 다른 방식으로 메서드에 의해 처리할 수 있다. 이렇게 처리하는 방식을 `다형성`이라고 한다.
+
+### 객체지향 설계 방법
+1. 도메인에 필요한 객체를 정리한다.
+2. 필요한 메시지를 추가한한다.
+3. 메시지에 적합한 수신자 객체를 선택한다.
+4. 필요한 메시지가 없을 때 까지 2 ~ 3번 과정을 반복한다.
+5. 객체들이 수신하는 메시지를 바탕으로 객체들의 인터페이스를 구성한다.
+6. 객체들의 메서드를 구현한다.
+
+- 다음 과정을 예제를 통해 적용해보자.
+- 예를 들어, **치킨 가게**라는 도메인 모델의 객체지향 설계를 한다고 가정해보자.
+
+### 1. 도메인에 필요한 객체를 정리한다.
+- 우선 `치킨`이라는 객체가 있어야할 것이고, 치킨을 구매하는 `손님`, `치킨`을 만드는 `요리사(사장)`객체가 필요하다. 또, `요리사(사장)`는 `손님`에게 돈을 저장하기 위한 `금고`가 필요할 것이다.
+- 이러한 객체들의 관계를 도메인 모델로 표현하면 아래와 같다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+### 2 ~ 4. 필요한 메시지 추가 및 수신할 객체 선택한다.
+- 첫번째로 필요한 메시지는 **치킨을 주문하라** 이다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 이 메시지에 적합한 객체는 무엇일까? `손님` 일 것이다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 하지만 손님은 치킨을 만들 수가 없다. 그래서 다른 객체에 메시지를 보내 도움을 요청해야한다. **치킨을 만들어라**라는 메시지를 보내야 한다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 이제 치킨을 만들 수 있는 객체를 찾아야 한다. 그 객체는 아마 `요리사(사장)` 일 것이다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop5.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- `요리사(사장)`은 치킨을 만들기 전에 먼저 `손님`에게 받은 돈을 저장해야한다. 따라서 돈을 저장할 수 있는 `금고` 객체에게 메시지를 요청한다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop6.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 마지막으로 `요리사(사장)`이 최종적으로 치킨을 생성하기 위한 메시지를 요청한다.
+  
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop7.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+### 5. 인터페이스 정리하기
+- 객체들이 수신하는 메시들을 정리하면 아래와 같다.
+
+<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop8.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+
+- 메시지들은 객체의 인터페이스를 구성한다. 아래는 인터페이스를 java 문법으로 나타낸 것이다.
+
+```java
+class Customer {  
+  public void order(int count) {}
+}
+
+class Chef {  
+  public List<Chicken> cookChicken(int money, int count) {}
+}
+
+class Safe {  
+  public void saveMoney(int money) {}
+}
+
+class Chicken {  
+  // public Chicken() {} 생략
+}
+```
+
+### 6. 메서드 구현하기
+- 정리한 인터페이스들을 이제 메서드로 구현해보자. 
+
+```java
+class Customer {  
+  public void order(int count, Chef chef) {
+    chef.cookChicken(count, 20000 * count) // 붕어빵 하나의 가격은 1000원
+  }
+}
+
+class Chef {  
+  private Safe safe;
+
+  public Chef(Safe safe) {
+    this.safe = safe;
+  }
+
+  public List<Chicken> cookChicken(int count, int money) {
+    safe.saveMoney(money);
+    List<Chicken> list = new ArrayList<Chicken>();
+    for(int i=0; i<count; i++) {
+      list.add(new Chicken());
+    }
+    return list;
+  }
+}
+
+class Safe {  
+  private int money;
+
+  public Safe(int money) {
+    this.money = money;
+  }
+
+  public void saveMoney(int money) {
+    this.money += money;
+  }
+}
+
+class Chicken {  
+  // public Chicken() {} 생략
+}
+```
+
+[출처](https://product.kyobobook.co.kr/detail/S000001628109)
+
 ## OOP(Object Oriented Programming)란 ?
 - OOP란 - `객체 지향 프로그래밍` 즉, 절차 지향 프로그래밍이 아닌 `객체의 관점에서 프로그래밍`을 한다는 것이다.
 </br>
