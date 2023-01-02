@@ -40,37 +40,37 @@
 - 우선 `치킨`이라는 객체가 있어야할 것이고, 치킨을 구매하는 `손님`, `치킨`을 만드는 `요리사(사장)`객체가 필요하다. 또, `요리사(사장)`는 `손님`에게 돈을 저장하기 위한 `금고`가 필요할 것이다.
 - 이러한 객체들의 관계를 도메인 모델로 표현하면 아래와 같다.
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/OOP/image/oop1.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 ### 2 ~ 4. 필요한 메시지 추가 및 수신할 객체 선택한다.
 - 첫번째로 필요한 메시지는 **치킨을 주문하라** 이다.
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/OOP/image/oop2.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 - 이 메시지에 적합한 객체는 무엇일까? `손님` 일 것이다.
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/OOP/image/oop3.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 - 하지만 손님은 치킨을 만들 수가 없다. 그래서 다른 객체에 메시지를 보내 도움을 요청해야한다. **치킨을 만들어라**라는 메시지를 보내야 한다.
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/OOP/image/oop4.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 - 이제 치킨을 만들 수 있는 객체를 찾아야 한다. 그 객체는 아마 `요리사(사장)` 일 것이다.
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop5.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/OOP/image/oop5.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 - `요리사(사장)`은 치킨을 만들기 전에 먼저 `손님`에게 받은 돈을 저장해야한다. 따라서 돈을 저장할 수 있는 `금고` 객체에게 메시지를 요청한다.
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop6.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/OOP/image/oop6.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 - 마지막으로 `요리사(사장)`이 최종적으로 치킨을 생성하기 위한 메시지를 요청한다.
   
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop7.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/OOP/image/oop7.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 ### 5. 인터페이스 정리하기
 - 객체들이 수신하는 메시들을 정리하면 아래와 같다.
 
-<img src="https://github.com/dltkd1395/CS-study/blob/main/DesignPattern/image/oop8.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/dltkd1395/CS-study/blob/main/OOP/image/oop8.png" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 - 메시지들은 객체의 인터페이스를 구성한다. 아래는 인터페이스를 java 문법으로 나타낸 것이다.
 
